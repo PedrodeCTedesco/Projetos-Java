@@ -20,6 +20,9 @@ public class InitArray
 		
 		System.out.println("Método de manipular coluna.");
 		manipularColunaArray(array1);
+		
+		System.out.println("Método de soma de todos os valores do array.");
+		System.out.print(somaDosValoresDoArray(array2));
 	};//fim da classe main
 	
 	/**Método para gerar o output dos valores dos arrays*/
@@ -47,12 +50,32 @@ public class InitArray
 		{
 			//Como temos especificado arr[1] isso significa que para cada referência no array arr[][]
 			//pegaremos sempre a primeira linha. Ainda, na primeira linha passaremos o valor 19.
-			arr[1][coluna] = 19;
+			arr[1][coluna] = 20;
 			
 		};//fim da sentença de iteração for
 		System.out.print("O array depois é:\n");
 		outputArray(arr);
 		
 	};//fim do método manipularColunaArray(int arr[][]);
+	
+	public static int somaDosValoresDoArray (int arr[][])
+	{
+		System.out.print("O array antes era:\n");
+		outputArray(arr);
+		
+		int total = 0;
+		
+		for (int row = 0; row < arr.length; row += 1)
+		{
+			for (int column = 0; column < arr[row].length; column += 1)
+			{
+				total += arr[row][column];
+			};//fim da sentença de iteração interna
+		};//fim da sentença de iteração externa
+		
+		System.out.print("O total é: ");
+		
+		return total;
+	};//fim do método somaDosValoresDoArray
 	
 };//fim da classe InitArray
