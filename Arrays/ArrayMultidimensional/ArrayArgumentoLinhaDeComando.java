@@ -20,7 +20,7 @@ public class ArrayArgumentoLinhaDeComando
 			int incremento = Integer.parseInt(args[2]);
 			
 			//calcula o valor de cada elemento no array
-			for (int counter = 0; counter < args.length; counter += 1)
+			for (int counter = 0; counter < arr.length; counter += 1)
 			{
 				arr[counter] = valorInicial + incremento * counter;
 			};//fim da sentença de iteração for
@@ -28,7 +28,7 @@ public class ArrayArgumentoLinhaDeComando
 			System.out.printf("%s%8s%n", "Index", "Valor");
 			
 			//exibe o valor e o índice do array
-			for (int counter = 0; counter < args.length; counter += 1)
+			for (int counter = 0; counter < arr.length; counter += 1)
 			{
 				System.out.printf("%5d%8d%n", counter, arr[counter]);
 			};//fim da sentença de iteração for
