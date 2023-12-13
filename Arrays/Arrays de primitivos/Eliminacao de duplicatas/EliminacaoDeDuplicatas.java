@@ -13,6 +13,8 @@ public class EliminacaoDeDuplicatas
 	public static void main (String[]args)
 	{
 		
+		System.out.printf("%15s%20s%25s%25s%25s%n", "índice", "Array de iguais", "Array de diferentes", "Array de descartáveis", "Array final");
+		
 		/**Criando as variáveis para inserção dos números inteiros de 10 a 100 (inclusive) */
 		
 		Random randomNumber = new Random();
@@ -32,6 +34,7 @@ public class EliminacaoDeDuplicatas
 		/**Invocando o método da classe */
 		
 		eliminacaoDeDuplicatas(INTEIROS_DIFERENTES);
+		removerDuplo(INTEIROS_DIFERENTES);
 			
 	};//fim do método main
 	
@@ -63,7 +66,7 @@ public class EliminacaoDeDuplicatas
 		int j = 1;
 		int[] arrDiferentes = new int[arr.length];
 		int[] arrIguais = new int [arr.length];
-		int[] arrDescartáveis = new int [arr.length];
+		int[] arrDescartaveis = new int [arr.length];
 		
 		for(int i = 0; i < arr.length - 1; i += 1)
 		{
@@ -74,6 +77,8 @@ public class EliminacaoDeDuplicatas
 			//O método compare() da classe Integer retorna 0 se os valores forem iguais, -1 se b > a e +1 se a > b.
 			
 			int comparacao = Integer.compare(a,  b);
+			//System.out.print(comparacao + "\n");
+			
 			
 			switch (comparacao)
 			{
@@ -81,38 +86,76 @@ public class EliminacaoDeDuplicatas
 					arrIguais[i] = a;	
 				break;
 				
-				case 1, -1:
+				case 1:
 				
-					for (int verificar = 0; verificar < arr.length; verificar +=1)
+					for (int verificar = i; verificar < arr.length; verificar +=1)
 					{
 						if (arrDiferentes[verificar] == a)
 						{
-							arrDescartáveis[verificar] = a;
-							
+							arrDescartaveis[verificar] = a;
 						} else if (arrDiferentes[verificar] == b)
 						{
-							arrDescartáveis[verificar] = b;
-							
-						} else
+							arrDescartaveis[verificar] = b;
+						} else 
 						{
 							arrDiferentes[i] = b;
-							arrDiferentes[i + 1] = a;
-							
-						}//fim da sentença de seleção condicional composta	
-					};//fim da sentença de iteração
+							arrDiferentes[i + 1] = a;						
+						}
 					
+					};//fim da sentença de iteração
+						
 				break;
 			};//fim da sentença de seleção múltipla
 			
-			j+=1;
+				j+=1;
 		};//fim da sentença de iteração for
 		
-		for (int x : arrDiferentes)
+		
+		int[]arrFinal = new int[arr.length];
+		
+		for (int z = 0; z < arr.length; z +=1)
 		{
-			System.out.printf("%d ", x);	
-		}
+			for (int y = 0; y < arr.length; y += 1)
+			{
+				if (arrDiferentes[z] != arrIguais[y] && arrIguais[y] != 0)
+				{
+					arrFinal[z] = arrDiferentes[z];
+			
+				}//fim da sentença de seleção condicional simples
+			}//fim da sentença de iteração for interna
+		}//fim da sentença de iteração for externa
+		
+		
+		//método de limpa
+		
+		
+		//Controle
+		for (int output = 0; output < arr.length; output += 1)
+		{
+			System.out.printf("%12d%15d%25d%25d%25d%n", output, arrIguais[output], arrDiferentes[output], arrDescartaveis[output], arrFinal[output]);	
+		};//fim da sentença de iteração for
+				
+	
 	};//fim do método eliminaçãoDeDuplicatas(int[]arr);
 	
+	public static void removerDuplo (int[] arr)
+	{
+		int j = 1;
+		int[] arrDuplos = new int[arr.length];
+		
+		for(int i = 0; i < arr.length - 1; i += 1)
+		{
+			if (arr[i] == arr[j])
+			{
+				arrDuplos[i] = arr[i];
+			}
+			j+=1;
+		};//fim da sentença de iteração for
+		for (int x : arrDuplos)
+		{
+			System.out.printf("%d ", x);
+		}
+	};//fim do método removerDuplo(int[] arr);
 	
 	
 	/**Tentativas anteriores:
