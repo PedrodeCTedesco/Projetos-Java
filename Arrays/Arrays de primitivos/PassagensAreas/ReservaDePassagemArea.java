@@ -6,7 +6,7 @@ Primeira Classe e digite 2 para Classe Econômica]. Se o usuário digitar 1, seu
 (poltronas 1 a 5). Se o usuário digitar 2, seu aplicativo deve atribuir um assento na classe econômica (poltronas 6 a 10). Seu aplicativo 
 deve exibir um cartão de embarque indicando o número da poltrona da pessoa e se ela está na primeira classe ou na classe econômica.
 Utilize um array unidimensional do tipo primitivo boolean para representar o gráfico de assentos do avião. Inicialize todos os elementos do
- array como false para 4indicar que todas as poltronas estão desocupadas. À medida que cada assento é atribuído, configure o elemento 
+ array como false para indicar que todas as poltronas estão desocupadas. À medida que cada assento é atribuído, configure o elemento 
  correspondente do array como true para indicar que o assento não está mais disponível.
 Seu aplicativo nunca deve atribuir uma poltrona que já foi reservada. Quando a classe econômica estiver lotada, seu aplicativo deve 
 perguntar à pessoa se ela aceita ficar na primeira classe (e vice-versa). Se sim, faça a atribuição apropriada de assento. Se não, 
@@ -41,7 +41,13 @@ public class ReservaDePassagemArea
 			switch (opcao)
 			{
 				case 1:
-					primeiraClasse(assentosDisponiveis);
+					primeiraClasseReserva(assentosDisponiveis);
+					//primeiraClassePoltronasLivres(assentosDisponiveis);
+					primeiraClasseCheia(assentosDisponiveis);
+				break;
+				case 2:
+					classeEconomicaReserva(assentosDisponiveis);
+					classeEconomicaCheia(assentosDisponiveis);
 				break;
 			};//fim da sentença de seleção múltipla
 		};//fim da sentença de iteração while
@@ -51,34 +57,107 @@ public class ReservaDePassagemArea
 	/**CAMPOS
 	 * +assentosDisponiveis: boolean[] --> um array de booleanos que representam a disponibilidade de assentos no avião. Todas as posições estão vagas (false);
 	 * */
-	public static boolean[] assentosDisponiveis = new boolean[10];
+	public static boolean[] assentosDisponiveis = new boolean[11];
 	
-	/**MÉTODOS*/
+	/**MÉTODOS
+	 * +primeiraClasseReserva(boolean arr[]): void --> realiza a reserva de uma poltrona na primeira classe.
+	 * +primeiraClassePoltronasLivres(boolean[] arr): void --> verifica quais poltronas livres existem na primeira classe
+	 * +primeiraClasseCheia(boolean[] arr): void --> verifica se todas as poltronas na primeira classe estão ocupadas.
+	 * +classeEconomiaReserva(boolean[]arr): void --> realiza a reserva de uma poltrona na classe econômica 
+	 * +classeEconomicaCheia(boolean[]arr): void -->verifica se todas as poltronas na classe econômica estão ocupadas.
+	 * */
 	
-	public static void primeiraClasse(boolean arr[])
+	public static void primeiraClasseReserva(boolean[] arr)
 	{
 		//Variáveis de validação da operação
 		int indicePassagem = 0;
 		boolean poltronaOcupada = false;
 		
-		//Restringir até a posição 4 do array 
-		for (int i = 0; i < 5; i+=1)
+		//Restringir até a posição 6 do array 
+		for (int i = 1; i < 6; i+=1)
 		{
 			if (arr[i] == false && arr[i] != true)
 			{
 				arr[i] = true;
 				indicePassagem = i;
 				poltronaOcupada = true;
+				System.out.printf("%s%n%s%n%s%d%n", "CARTÃO DE EMBARQUE", "Primeira classe", "Poltrona: ", indicePassagem);
 				break;
-			} else
-			{
-				System.out.printf("%s%n", "O próximo voo parte em 3 horas.");
 			};//fim da sentença de seleção simples
+		};//fim da sentença de iteração for		
+	};//fim do método primeiraClasse();
+	
+	public static void primeiraClassePoltronasLivres(boolean[]arr)
+	{	
+		for(int i = 0; i < 6; i += 1)
+		{
+			if (arr[i] == false && i != 0)
+			{
+				System.out.printf("Poltronas disponíveis na primeira classe: %d%n", i);
+			};//fim da sentença de seleção condicional simples
+		};//fim da sentença de iteração for
+	};//fim do método primeiraClassePoltronasLivres();
+
+	public static void primeiraClasseCheia(boolean arr[])
+	{
+		//Variável de apoio
+		int counter = 0;
+		
+		for (int i = 0; i < 6; i += 1)
+		{
+			if (arr[i] == true)
+			{
+				counter+=1;
+			}//fim da sentença de seleção condicional simples
 		};//fim da sentença de iteração for
 		
-		//Retornar informações: índice de pesagem (poltrona ocupada) e se a venda foi bem-sucedida;
-		System.out.printf("Status da venda: %b%nPoltrona ocupada: %d%n", poltronaOcupada, indicePassagem);
-		
-	};//fim do método primeiraClasse();
+		switch(counter)
+		{
+			case 5:
+				System.out.printf("%s%n", "Todas as poltronas na primeira classe estão ocupadas");
+			break;
+		};//fim da sentença de seleção múltipla
+	};//fim do método primeiraClasseCheia(boolean arr[])
+
+	public static void classeEconomicaReserva(boolean[]arr)
+	{
+		//Variáveis de validação da operação
+		int indicePassagem = 0;
+		boolean poltronaOcupada = false;
+				
+		//Iniciar a partir da posição 6 do array 
+		for (int i = 6; i < 11; i+=1)
+		{
+			if (arr[i] == false && arr[i] != true)
+			{
+				arr[i] = true;
+				indicePassagem = i;
+				poltronaOcupada = true;
+				System.out.printf("%s%n%s%n%s%d%n", "CARTÃO DE EMBARQUE", "Classe econômica", "Poltrona: ", indicePassagem);
+				break;
+			};//fim da sentença de seleção simples
+		};//fim da sentença de iteração for		
+	};//fim do método classeEconomicaReserva(boolean[]arr);
+	
+	public static void classeEconomicaCheia(boolean[]arr)
+	{
+		//Variável de apoio
+		int counter = 0;
+				
+		for (int i = 6; i < 11; i += 1)
+		{
+			if (arr[i] == true)
+			{
+				counter+=1;
+			}//fim da sentença de seleção condicional simples
+		};//fim da sentença de iteração for
+				
+		switch(counter)
+		{
+			case 5:
+				System.out.printf("%s%n", "Todas as poltronas na classe econômica estão ocupadas");
+			break;
+		};//fim da sentença de seleção múltipla	
+	};//fim do método classeEconomicaCheia(boolean[]arr);
 	
 };//fim da classe ReservaDePassagemArea
