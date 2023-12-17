@@ -117,7 +117,6 @@ public class ReservaDePassagemArea
 		return counter;
 	};//fim do método primeiraClasseCheia(boolean arr[])
 	
-
 	public static boolean classeEconomicaReserva(boolean[]arr)
 	{
 		//Variáveis de validação da operação
