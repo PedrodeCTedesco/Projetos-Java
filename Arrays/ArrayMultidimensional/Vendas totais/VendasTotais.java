@@ -24,46 +24,37 @@ public class VendasTotais
 		//Inicilizando em tempo de execução o array bidimensional 
 		//As linhas serão os produtos (primeiro array)
 		//As colunas serão os vendedores (segundo array)
-		double[][]sales = new double[4][4]; //[4][5] funciona
+		double[][]sales = new double[5][4]; 
 		
 		for (int linha = 0; linha < sales.length; linha += 1)
 		{
-			for (int coluna = 0; coluna < sales.length; coluna += 1)
+			//Iterando nos valores da coluna nós utilizamos o tamanho do array (length) da linha.
+			//Com a manobra acima garantimos que todas as linhas sejam preenchidas
+			for (int coluna = 0; coluna < sales[linha].length; coluna += 1)
 			{
+				//Preenchendo todas as posições do array
 				sales[linha][coluna] = randomNumber.nextDouble() * 100;
 			};//fim da sentença de iteração for interna (colunas)
 		};//fim da sentença de iteração for externa (linhas)
 		
-	/**	//Posicionando o valor dos itens na tabela
-		for(int row = 0; row < sales.length; row += 1)
-		{
-			for (int column = 0; column < sales[row].length; column += 1)
-			{
-				System.out.printf("[%d][%d] = %.1f", row, column, sales[row][column]);
-			};//fim da sentença de iteração for interna
-		};//fim da sentença de iteração for externa
-	*/
-		outputProduct(sales);
+		outputTabelaVendasTotais(sales);
 		
 	};//fim do método main
 	
-	/**CAMPOS
-	 * */
-	//public static final String[] NUMEROS_VENDEDORES = {"Equipe de vendas 1", "Equipe de vendas 2", "Equipe de vendas 3", "Equipe de vendas 4"};
-	//public static final String[] PRODUTOS = {"Produto 1", "Produto 2", "Produto 3", "Produto 4", "Produto 5"};
-	
 	/**MÉTODOS
+	 * +outputTabelaVendasTotais(double[][]arr): void --> método para gerar as saídas da tabela de vendas totais por produto e por vendedor
+	 * @param double[][]arr --> array bidimensional com os valores das vendas por produto e vendedor
 	 * */
-	public static void outputProduct(double[][] arr)
+	public static void outputTabelaVendasTotais(double[][] arr)
 	{
 		
 		//Ajustando as colunas e as linhas
 		System.out.printf("            ");
 		
 		//Criando um título de coluna para cada vendedor
-		//Note que utilizamos o tamanho do array para posicionarmos o nome de cada coluna em todo o comprimento da tabela
-		//Dessa forma, o valor de length do primeiro array será utilizado como referência
-		for (int vendedor = 0; vendedor < arr.length; vendedor += 1)
+		//O valor de length do primeiro array será utilizado como referência, i.e., o valor do array das linhas.
+		//Como esse valor é 5 e temos 4 vendedores, utilizamos a notação arr.length - 1
+		for (int vendedor = 0; vendedor < arr.length - 1; vendedor += 1)
 		{
 			System.out.printf("%12s%d", "Vendedor ", vendedor + 1);
 		};//fim da sentença de iteração for
@@ -84,12 +75,37 @@ public class VendasTotais
 				System.out.printf("%13.1f", d);
 			};//fim da sentença de iteração for aprimorado
 			
+			//inserir lógica para calcular o valor total por produto (valor total por linha)
+			//Variável para armazenar o total de vendas por produto
+			double valorTotalProduto = 0.0;
+			
+			for (int coluna = 0; coluna < arr.length - 1; coluna += 1)
+			{
+				valorTotalProduto += arr[produto][coluna];
+			};//fim da sentença de iteração for externa (linhas)
+			
+			//Gerando a saída do valor total por linha
+			System.out.printf("%15.1f", valorTotalProduto);
+			
+			//Gerando a nova linha para que a próxima linha da tabela seja posicionada no lugar adequado
 			System.out.println();
 		};//fim da sentença de iteração for
 		
 		//Gerando a linha de valor total de vendas de cada produto
 		System.out.printf("%s", "Total (R$)");
 		
-	};//fim do método outputProduct();
+	};//fim do método outputTabelaVendasTotais();
+	
+	public static double totalVendasProduto(double[][]arr)
+	{
+		//Variável para armazenar o total de vendas por produto
+		double valorTotalProduto = 0.0;
+		
+		for (int coluna = 0; coluna < arr.length - 1; coluna += 1)
+		{
+			valorTotalProduto += arr[0][coluna];
+		};//fim da sentença de iteração for externa (linhas)
+		return valorTotalProduto;
+	};//fim do método totalVendasProduto(double[][]arr);
 	
 };//fim da classe VendasTotais
