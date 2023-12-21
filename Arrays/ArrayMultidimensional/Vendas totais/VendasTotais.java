@@ -48,6 +48,8 @@ public class VendasTotais
 	public static void outputTabelaVendasTotais(double[][] arr)
 	{
 		
+		//double valorTotalVendedor = 0.0;
+		
 		//Ajustando as colunas e as linhas
 		System.out.printf("            ");
 		
@@ -75,37 +77,49 @@ public class VendasTotais
 				System.out.printf("%13.1f", d);
 			};//fim da sentença de iteração for aprimorado
 			
-			//inserir lógica para calcular o valor total por produto (valor total por linha)
+			//Inserir lógica para calcular o valor total por produto (valor total por linha)
 			//Variável para armazenar o total de vendas por produto
 			double valorTotalProduto = 0.0;
 			
 			for (int coluna = 0; coluna < arr.length - 1; coluna += 1)
 			{
-				valorTotalProduto += arr[produto][coluna];
+				valorTotalProduto += arr[produto][coluna];			
 			};//fim da sentença de iteração for externa (linhas)
 			
 			//Gerando a saída do valor total por linha
 			System.out.printf("%15.1f", valorTotalProduto);
-			
 			//Gerando a nova linha para que a próxima linha da tabela seja posicionada no lugar adequado
 			System.out.println();
+			
+			//lógica para vendas totais por vendedor (colunas)
+		
 		};//fim da sentença de iteração for
 		
 		//Gerando a linha de valor total de vendas de cada produto
 		System.out.printf("%s", "Total (R$)");
 		
+		//Lógica para calcular o valor de vendas totais por vendedor (por colunas)
+		//Atualmente calcula apenas a primeira coluna. A sentença de seleção condicional simples permite que
+		//apenas o último valor somado pela expressão valorTotalVendedor += x seja retornado.
+		double valorTotalVendedor = 0.0;
+		
+		for (int produto = 0; produto < arr.length; produto += 1)
+		{
+			for (double x : arr[produto])
+			{
+				valorTotalVendedor += x;
+				
+				if (produto == 4)
+				{
+					System.out.printf("%13.1f ", valorTotalVendedor);	
+				}//fim da sentença de seleção condicional simples
+				break;
+			};//fim da sentença de iteração for aprimorado		
+		};//fim da sentença de iteração for
+		
 	};//fim do método outputTabelaVendasTotais();
 	
-	public static double totalVendasProduto(double[][]arr)
-	{
-		//Variável para armazenar o total de vendas por produto
-		double valorTotalProduto = 0.0;
-		
-		for (int coluna = 0; coluna < arr.length - 1; coluna += 1)
-		{
-			valorTotalProduto += arr[0][coluna];
-		};//fim da sentença de iteração for externa (linhas)
-		return valorTotalProduto;
-	};//fim do método totalVendasProduto(double[][]arr);
+	
+	
 	
 };//fim da classe VendasTotais
