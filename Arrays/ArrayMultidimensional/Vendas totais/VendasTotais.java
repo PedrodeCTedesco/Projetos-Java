@@ -90,36 +90,55 @@ public class VendasTotais
 			System.out.printf("%15.1f", valorTotalProduto);
 			//Gerando a nova linha para que a próxima linha da tabela seja posicionada no lugar adequado
 			System.out.println();
-			
-			//lógica para vendas totais por vendedor (colunas)
-		
 		};//fim da sentença de iteração for
 		
 		//Gerando a linha de valor total de vendas de cada produto
 		System.out.printf("%s", "Total (R$)");
 		
 		//Lógica para calcular o valor de vendas totais por vendedor (por colunas)
-		//Atualmente calcula apenas a primeira coluna. A sentença de seleção condicional simples permite que
-		//apenas o último valor somado pela expressão valorTotalVendedor += x seja retornado.
+		//Utilização de variáveis em tempo de execução para capturar as colunas do array, e variáveis para iteração.
 		double valorTotalVendedor = 0.0;
-		
-		for (int produto = 0; produto < arr.length; produto += 1)
+		double valorTotalVendedor2 = 0.0;
+		double valorTotalVendedor3 = 0.0;
+		double valorTotalVendedor4 = 0.0;
+		int x = 0;
+		int y = 1;
+		int z = 2;
+		int a = 3;
+	
+		while (x != 4)
 		{
-			for (double x : arr[produto])
+			//Primeira coluna
+			for (double[] item : arr)
 			{
-				valorTotalVendedor += x;
-				
-				if (produto == 4)
-				{
-					System.out.printf("%13.1f ", valorTotalVendedor);	
-				}//fim da sentença de seleção condicional simples
-				break;
-			};//fim da sentença de iteração for aprimorado		
-		};//fim da sentença de iteração for
-		
+				valorTotalVendedor += item[x];
+			};//fim da sentença de iteração for aprimorado
+			
+			//Segunda coluna
+			for (double[] item2 : arr)
+			{
+				valorTotalVendedor2 += item2[y];
+			};//fim da sentença de iteração for aprimorado
+			
+			//Terceira coluna
+			for (double[] item3 : arr)
+			{
+				valorTotalVendedor3 += item3[z];
+			};//fim da sentença de iteração for aprimorado
+			
+			//Quarta coluna
+			for (double[] item4 : arr)
+			{
+				valorTotalVendedor4 += item4[a];
+			};//fim da sentença de iteração for aprimorado
+			
+			//Gerando a saída da última linha da tabela (valor total por coluna/vendedor)
+			System.out.printf("%13.1f%13.1f%12.1f%14.1f", valorTotalVendedor, valorTotalVendedor2, valorTotalVendedor3, valorTotalVendedor4);
+			x+=1;
+			y+=1;
+			z+=1;
+			a+=1;
+			break;
+		};//fim da sentença de iteração while		
 	};//fim do método outputTabelaVendasTotais();
-	
-	
-	
-	
 };//fim da classe VendasTotais
