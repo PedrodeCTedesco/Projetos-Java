@@ -76,7 +76,7 @@ public class ReservaDePassagemArea
 	 * 
 	 * */
 	
-	public static boolean primeiraClasseReserva(boolean[] arr)
+	private static boolean primeiraClasseReserva(boolean[] arr)
 	{
 		//Variáveis de validação da operação
 		int indicePassagem = 0;
@@ -95,7 +95,7 @@ public class ReservaDePassagemArea
 		return false;
 	};//fim do método primeiraClasse();
 	
-	public static int primeiraClasseCheia(boolean arr[])
+	private static int primeiraClasseCheia(boolean arr[])
 	{
 		//Variável de apoio
 		int counter = 0;
@@ -117,7 +117,7 @@ public class ReservaDePassagemArea
 		return counter;
 	};//fim do método primeiraClasseCheia(boolean arr[])
 	
-	public static boolean classeEconomicaReserva(boolean[]arr)
+	private static boolean classeEconomicaReserva(boolean[]arr)
 	{
 		//Variáveis de validação da operação
 		int indicePassagem = 0;
@@ -136,7 +136,7 @@ public class ReservaDePassagemArea
 		return false;
 	};//fim do método classeEconomicaReserva(boolean[]arr);
 	
-	public static int classeEconomicaCheia(boolean[]arr)
+	private static int classeEconomicaCheia(boolean[]arr)
 	{
 		//Variável de apoio
 		int counter = 0;
@@ -158,7 +158,7 @@ public class ReservaDePassagemArea
 		return counter;
 	};//fim do método classeEconomicaCheia(boolean[]arr);
 	
-	public static int todasAsPoltronasOcupadas(boolean[]arr)
+	private static int todasAsPoltronasOcupadas(boolean[]arr)
 	{
 		int counter = 0;
 		

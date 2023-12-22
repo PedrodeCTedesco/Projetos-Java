@@ -61,8 +61,8 @@ public class JogoDeDados
 	 * dado1: int --> o primeiro dado;
 	 * dado2: int --> o segundo dado;
 	 * */
-	public int dado1;
-	public int dado2;
+	private int dado1;
+	private int dado2;
 	
 	
 	/**MÉTODOS. São métodos de classe
@@ -78,7 +78,7 @@ public class JogoDeDados
 	 * Será utilizado para verificar o funcionamento dos métodos da classe
 	 * @param int[] arr --> um array de inteiros
 	 * ;*/
-	public static int lancaDados()
+	private static int lancaDados()
 	{
 		//Instanciar um objeto da classe Random
 		Random randomNumber = new Random();
@@ -89,7 +89,7 @@ public class JogoDeDados
 		return valor;
 	};//fim da classe lancaDados();
 	
-	public static int somaDados(int d1, int d2)
+	private static int somaDados(int d1, int d2)
 	{
 		int soma = d1 + d2;
 		return soma;

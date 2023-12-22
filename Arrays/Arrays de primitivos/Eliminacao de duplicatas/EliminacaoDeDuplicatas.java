@@ -51,7 +51,7 @@ public class EliminacaoDeDuplicatas
 
 	};//fim do método main
 	
-	public static int addItem(int[]arr, int item)
+	private static int addItem(int[]arr, int item)
 	{
 		int verdadeiro = 1;
 		int falso = 0;
@@ -66,13 +66,13 @@ public class EliminacaoDeDuplicatas
 		return falso;
 	};//fim do método addItem(int[]arr, int item);
 
-	public static void displayArray (int[] arr)
+	private static void displayArray (int[] arr)
 	{
 		for (int i = 0; i < arr.length; i += 1)
 		{
 			if (arr[i] != 0)
 			{
-				System.out.printf("%s: %d%n", "Valores do array", arr[i]);
+				System.out.printf("%n%s: %d%n", "Valores do array", arr[i]);
 			};//fim da sentença de seleção simples
 		};//fim da sentença de iteração for
 	};//fim do método displayArray(int[]arr);

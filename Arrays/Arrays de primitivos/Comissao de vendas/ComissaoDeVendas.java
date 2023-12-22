@@ -49,7 +49,7 @@ public class ComissaoDeVendas
 	 * @param double vendasBrutas --> o valor das vendas brutas do mês.
 	 * @return double salario --> o valor do salário final, i.e., a partir do bônus e do valor da comissão.
 	 * */
-	public static double valorComissao(double vendasBrutas)
+	private static double valorComissao(double vendasBrutas)
 	{
 		/**Variável de apoio 
 		 * PERCENTUAL: double {valor constante}*/
@@ -61,7 +61,7 @@ public class ComissaoDeVendas
 		return valorComissao;
 	};//fim do método valorComissao(double vendasBrutas);
 	
-	public static double salarioMensal(double vendasBrutas)
+	private static double salarioMensal(double vendasBrutas)
 	{
 		double salario = SALARIO_BASE + BONUS + valorComissao(vendasBrutas);
 		return salario;
