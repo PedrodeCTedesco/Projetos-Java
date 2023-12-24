@@ -56,6 +56,6 @@ public class Date
 	/**Métodos */
 	public String toString()
 	{
-		return String.format("%d%d%d", day, month, year);
+		return String.format("%d/%d/%d", day, month, year);
 	};//fim do método toString();
 };//fim da classe Date
