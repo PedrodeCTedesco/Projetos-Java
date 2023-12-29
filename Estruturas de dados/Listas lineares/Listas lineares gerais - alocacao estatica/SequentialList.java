@@ -3,6 +3,12 @@
  * @author pedro de castro tedesco
  * @link "Algoritmos e Estrutura de Dados" (Gustavo Lermen)
  * @since 27/12/2023*/
+
+/**Note que uma lista é diferente de uma matriz unidimensional de alocação estática (array). Não podemos utilizar os métodos
+ * de array em uma lista; ainda, embora possamos referenciar os elementos de uma lista assim como o fazemos com elementos de um 
+ * array não podemos iterar sobre os elementos da lista e alterá-los. Outro ponto, não podemos alterar um elemento de uma lista, 
+ * pois eles são imutáveis. 
+ * */
  
 public class SequentialList
 {
@@ -21,6 +27,8 @@ public class SequentialList
 	/**CONSTRUTOR.
 	 * +SequentialList)int size): SequentialList --> construtor que recebe como parâmetro o tamanho da lista.
 	 * @param int size --> o tamanho da lista ao ser inicializada.
+	 * 
+	 * Repare que o tipo de dado para implementação da lista é uma matriz unidimensional.
 	 * */
 	public SequentialList(int size)
 	{
@@ -31,16 +39,47 @@ public class SequentialList
 	 * +getObject(int index): Object --> retorna o objeto na posição de índice passada como parâmetro.
 	 * @param int index --> a posição de índice desejada
 	 * @return Object --> uma referência do objeto armazenado na posição de índice.
+	 * Runtime: O(1);
+	 * Complexidade da espaço: O(1);
 	 * 
 	 * +add(object obj): boolean --> o método verifica se é possível adicionar um novo elemento na lista ao final da lista.
 	 * @param Object obj --> o novo objeto que desejamos armazenar na lista
 	 * @return boolean --> se true, então o objeto foi adicionado; se false, não foi.
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
 	 * 
 	 * +add(Object obj, int index): boolean --> o método verifica se é possível adicionar um elemento na posição passada por parâmetro.
 	 * Esse método é utilizado caso a lista seja ordenada.
 	 * @param Object obj --> o objeto que desejamos inserir
 	 * @param int index --> a posição na qual desejamos inserir o objeto
 	 * @return boolean --> se true, a inserção foi bem-sucedida; se false, não foi
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
+	 * 
+	 * +remove(int index): Object --> remove uma referência a um objeto alocado na posição de índice passada por parâmetro.
+	 * @param int index --> a posição de índice da referência que desejamos remover
+	 * @return Object --> o objeto removido
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
+	 * 
+	 * +isEmpty(): boolean --> verifica se a lista está vazia.
+	 * @return boolean --> se true, a lista está vazia; se false, não está.
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
+	 * 
+	 * +isFull(): boolean --> verifica se a lista está cheia.
+	 * @return boolean --> se true, a lista está cheia; se false, não está
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
+	 * 
+	 * +getSize(): int --> retorna o tamanho da lista
+	 * @return int --> o tamanho da lista
+	 * Runtime: O(1);
+	 * Complexidade de espaço O(1);
+	 * 
+	 * +print(): void --> exibe na janela de comando os elementos da lista
+	 * Runtime: O(1);
+	 * Complexidade de espaço: O(1);
 	 * */
 	
 	public Object getObject(int index)
@@ -97,5 +136,70 @@ public class SequentialList
 		list[index] = obj;
 		return true;
 	};//fim do método add(Object obj, int index)
+	
+	public Object remove(int index)
+	{
+		//Verifica se a lista está vazia
+		//Note que não é necessária a existência da cláusula else
+		if (isEmpty())
+		{
+			return null;
+		} else if (index < 0 || index > last)
+		{
+			System.out.printf("%s", "Índice inexistente");
+			return null;
+		} 
+
+		//Se a verificação for bem sucedida armazenamos uma referência do objeto e alteramos a posição dos demais elementos na lista
+		Object obj = list[index];
+		int numberOfElements = last - index;
+		
+		//Realiza uma cópia do array
+		if (numberOfElements > 0)
+		{
+			System.arraycopy(list, index + 1, list, index, numberOfElements);
+		};//fim da sentença de seleção simples
+		
+		//Altera a posição do último elemento para null, decrementa o valor da posição e retorna o objeto removido
+		list[last] = null;
+		last -= 1;
+		return obj;
+	};//fim do método remove(int index);
+	
+	public boolean isEmpty()
+	{
+		if (last == -1)
+		{
+			return true;
+		} else
+		{
+			return false;
+		}//fim da sentença de seleção condicional composta
+	};//fim do método isEmpty();
+	
+	public boolean isFull()
+	{
+		if (last == list.length - 1)
+		{
+			return true;
+		} else
+		{
+			return false;
+		}//fim da sentença de seleção condicional composta
+	};//fim do método isFull();
+	
+	public int getSize()
+	{
+		return last + 1;
+	};//fim do método getSize();
+	
+	public void print()
+	{
+		//Exibe todos os elementos da lista
+		for(Object obj : list)
+		{
+			System.out.print(obj + " / ");
+		};//fim da sentença de iteração for aprimorado
+	};//fim do método print()
 	
 };//fim da classe SequentialList
