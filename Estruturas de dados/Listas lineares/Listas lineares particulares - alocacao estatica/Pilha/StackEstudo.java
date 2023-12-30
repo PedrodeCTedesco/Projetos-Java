@@ -6,7 +6,9 @@
 public class StackEstudo
 {
 	/**CAMPOS. Ambos são variáveis de instância.
-	 * -stack[]: Object --> uma pilha de elementos de qualquer tipo que herde a classe Object
+	 * -stack[]: Object --> uma pilha de elementos de qualquer tipo que herde a classe Object. Note que a estrutura
+	 * de dados para a implementação é um vetor (matriz unidimensional), pois a alocação é estática e os valores
+	 * armazenados estarão em posições contíguas de memória.
 	 * -top: int --> variável para acompanhar o valor do topo da pilha
 	 * */
 	private Object stack[];
