@@ -56,24 +56,14 @@ public class PasseioDoCavalo
 		//O valor da posição de índice board[3], 3 - 1 = 2. Novo valor da posição de índice: board[2];
 		//O valor da posição de índice board[][4], 4 - 2 = 2. Novo valor da posição de índice: board[][2];
 		//Valor final da posição do cavalo será dado pelos valores do índices: board[2][2];
-		board[3][4] = "K";
-		board[2][2] = "3";
-		System.out.printf("Valor de HORIZONTAL[3]: %d%n", HORIZONTAL[3]);
-		System.out.printf("Valor de VERTICAL[3]: %d%n", VERTICAL[3]);
+		String el = board[0][0] = "K";
 		
-		board[4][2] = "4";
-		System.out.printf("Valor de HORIZONTAL[3]: %d%n", HORIZONTAL[4]);
-		System.out.printf("Valor de VERTICAL[3]: %d%n", VERTICAL[4]);
-		
-		board[5][3] = "5";
-		System.out.printf("Valor de HORIZONTAL[5]: %d%n", HORIZONTAL[5]);
-		System.out.printf("Valor de VERTICAL[5]: %d%n", VERTICAL[5]);		
-
-		board[4][6] = "7";
-		System.out.printf("Valor de HORIZONTAL[5]: %d%n", HORIZONTAL[7]);
-		System.out.printf("Valor de VERTICAL[5]: %d%n", VERTICAL[7]);
 		//Visualizando o tabuleiro
 		print(board);
+		
+		//Testando o método nextPosition(String[][]arr, String element)
+		nextPosition(board, el);
+		
 		
 		//Variável moveNumber. É um número entre 0 e 7 que representa os movimentos do cavalo combinando os valores de ambos os arrays
 		//Random randomNumber = new Random();
@@ -97,6 +87,20 @@ public class PasseioDoCavalo
 	 * @param String[][] --> um array bidimensional de Strings
 	 * Runtime: O(N^2);
 	 * Complexidade de espaço: O(N^2);
+	 * 
+	 * -indexRow(String[][] arr, String element): int --> retorna a posição de índice da linha do elemento passado por parâmetro
+	 * @param String[][] arr --> vetor bidimensional de Strings
+	 * @param String element --> elemento que desejamos recuperar a posição de índice da linha
+	 * @return int --> o valor da posição de índice da linha
+	 * Runtime: O(N^2);
+	 * Complexidade de espaço: O(N^2);
+	 * 
+	 * -indexColumn(String[][]arr, String element): int --> retorna a posição de índice da coluna do elemento passado por parâmetro
+	 * @param String[][]arr --> vetor bidimensional de Strings
+	 * @param String element --> elemento que desejamos recuperar a posição de índice da coluna
+	 * @return int --> o valor da posição de índice da coluna 
+	 * Runtime: O(N^2);
+	 * Complexidade de espaço: O(N^2);
 	 * */
  	private static void print(String[][] arr)
 	{
@@ -114,5 +118,94 @@ public class PasseioDoCavalo
 		};//fim da sentença de iteração for externa	
 	};//fim do método print();
 
+	private static int indexRow(String[][] arr, String element)
+	{
+		//Variável local 
+		int linhaIndex = 0;
+		
+		//Itera peo array bidimensional em busca do elemento
+		for(int linha = 0; linha < arr.length; linha +=1) 
+		{
+			for(int coluna = 0; coluna < arr.length; coluna +=1)
+			{
+				if(element == arr[linha][coluna])
+				{
+					linhaIndex = linha;
+				}//fim da sentença de seleção condicional simples
+			};//fim da sentença de iteração for interna
+		};//fim da sentença de iteração for externa
+		return linhaIndex;
+	};//fim do método returnRowAndColumnIndex(int element)
+	
+	private static int indexColumn(String[][] arr, String element)
+	{
+		//Variável local 
+		int colunaIndex = 0;
+		
+		//Itera peo array bidimensional em busca do elemento
+		for(int linha = 0; linha < arr.length; linha +=1) 
+		{
+			for(int coluna = 0; coluna < arr.length; coluna +=1)
+			{
+				if(element == arr[linha][coluna])
+				{
+					colunaIndex = coluna;
+				}//fim da sentença de seleção condicional simples
+			};//fim da sentença de iteração for interna
+		};//fim da sentença de iteração for externa
+		return colunaIndex;
+	};//fim do método returnRowAndColumnIndex(int element)
+	
+	//Esse método deve pegar um dos números dos arrays unidimensionais e realizar o cálculo
+	private static void nextPosition(String[][]arr, String element)
+	{
+		//Retornar o valor armazenado na posição de índice do array unidimensional HORIZONTAL (colunas) e VERTICAL (linhas)
+		Random randomNumber = new Random();
+		int moveNumber = randomNumber.nextInt(0, 8);
+		
+		//Variável local de apoio
+		//int indexRowNotNegative = 0;
+		
+		//Variável local para armazenar o valor
+		int indexRow = HORIZONTAL[moveNumber];
+		int indexColumn = VERTICAL[moveNumber];
+		
+		//Cálculo da nova posição
+		int prevIndexRow = indexRow(arr, element);
+		int prevIndexColumn = indexColumn(arr, element);
+		
+		//Verificação de limites do tabuleiro
+		int nextIndexColumn = 0; //movimento horizontal, das colunas. Esse será o novo valor das colunas do movimento
+		int nextIndexRow = 0; //movimento vertitical, mudança de linha. Esse será o novo valor das linhas do movimento
+		
+		switch(prevIndexRow)
+		{
+			case 0, 1, 2, 3, 4, 5, 6, 7, 8:
+				//Se a linha for 0, 1, 2... 8 então o valor de indexColumn não pode ser negativo. Se for negativo ele sairá do tabuleiro
+				//Verifica se o valor de indexColumn é negativo
+				//System.out.printf("Primeiro valor de indexRow: %d%n", indexColumn); --> descomentar para verificar valor de entrada de indexColumn
+				
+				while(indexColumn < 0)
+				{
+					indexColumn = HORIZONTAL[randomNumber.nextInt(0, 8)];
+					//countLoop = indexRow;
+				};//fim da sentença de iteração while
+				System.out.printf("Valor de index row depois do loop while: %d%n", indexColumn);
+				nextIndexColumn = indexColumn;
+			break;
+		};//fim da sentença de seleção múltipla
+		
+		//Verificando se em relação as colunas o cavalo está na linha 0 e qualquer coluna
+		
+		//Verificando
+		//System.out.printf("Valor de index column: %d", nextIndexColumn); --> descomentar para verificar valor de saída de index column
+	};//fim do método nextPosition()
+	
+	private static boolean checkIndexRow(int number)
+	{
+		//Retorna true se o valor for negativo
+		return number < 0;
+	};//fim do método checkIndexRow(int number);
+	
 	
 };//fim da classe PasseioDoCavalo
