@@ -61,18 +61,19 @@ public class PasseioDoCavalo
 		int p1 = PosicoesCriticas.A5.getIndexRow();
 		int p2 = PosicoesCriticas.A5.getIndexColumn();
 		
-		board[3][5] = "K";
+		//board[3][5] = "K";
 		String e2 = p;
-		board[1][6] = p;
+		board[7][2] = p;
 		
 		//Visualizando o tabuleiro
 		print(board);
 		
-		//Verificando o método checkBoardBoundary()
-		System.out.printf("%s", checkBoardBoundary(board, e2));
+		//Verificando o método checkBoardBoundary(String[][]arr, String currentKnightPosition) e printArray(int[]arr);
+		//System.out.printf("%s:%d%n%s:%d", "Linha", decomposeArrayRow(checkBoardBoundary(board, e2)), "Coluna", decomposeArrayColumn(checkBoardBoundary(board, e2)));
+
 		
 		//Testando o método nextPosition(String[][]arr, String element)
-		//nextPosition(board, el);
+		nextPosition(board, checkBoardBoundary(board, e2));
 		
 		
 		//Variável moveNumber. É um número entre 0 e 7 que representa os movimentos do cavalo combinando os valores de ambos os arrays
@@ -175,30 +176,110 @@ public class PasseioDoCavalo
 		return colunaIndex;
 	};//fim do método returnRowAndColumnIndex(int element)
 	
-	private static void nextPosition(String[][]arr, String element)
+	private static void nextPosition(String[][]arr, int[]arr2) //invocamos o método checkBoardBoundary() que tem como retorno o array de inteiros
 	{
 		//Retornar o valor armazenado na posição de índice do array unidimensional HORIZONTAL (colunas) e VERTICAL (linhas)
 		Random randomNumber = new Random();
-		int moveNumber = randomNumber.nextInt(0, 8);
 		
-		//Variável local de apoio
-		//int indexRowNotNegative = 0;
+		//Armazenando o valor da linha e da coluna
+		int prevIndexRow = decomposeArrayRow(arr2); //valor virá do resultado de checkBoardBoundary(String[][]arr, currentKnightPosition);
+		int prevIndexColumn = decomposeArrayColumn(arr2);//valor virá do resultado de checkBoardBoundary(String[][]arr, currentKnightPosition);
 		
-		//Variável local para armazenar o valor
-		int indexRow = HORIZONTAL[moveNumber];
-		int indexColumn = VERTICAL[moveNumber];
+		//Variáveis para armazenar os próximos valores da posição do cavalo
+		int indexRow = 0;
+		int indexColumn = 0;
 		
-		//Verificação de limites do tabuleiro
-		int nextIndexColumn = 0; //movimento horizontal, das colunas. Esse será o novo valor das colunas do movimento
-		int nextIndexRow = 0; //movimento vertitical, mudança de linha. Esse será o novo valor das linhas do movimento
+		//Validação dos movimentos.
+		//Se estiver no canto esquerdo não são válidas as posições de índice: 2, 3, 4, 5
+		if( (prevIndexRow == PosicoesCriticas.A1.getIndexRow() && prevIndexColumn == PosicoesCriticas.A1.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A2.getIndexRow() && prevIndexColumn == PosicoesCriticas.A2.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A3.getIndexRow() && prevIndexColumn == PosicoesCriticas.A3.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A4.getIndexRow() && prevIndexColumn == PosicoesCriticas.A4.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A5.getIndexRow() && prevIndexColumn == PosicoesCriticas.A5.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A6.getIndexRow() && prevIndexColumn == PosicoesCriticas.A6.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.A7.getIndexRow() && prevIndexColumn == PosicoesCriticas.A7.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.A8.getIndexRow() && prevIndexColumn == PosicoesCriticas.A8.getIndexColumn()))
+		{
+			int moveNumber = randomNumber.nextInt(0, 8);
+			while ( moveNumber >= 2 && moveNumber <=5 )
+			{
+				moveNumber = randomNumber.nextInt(0, 8);
+				//System.out.printf("%d%n", moveNumber);
+				indexRow = HORIZONTAL[moveNumber];
+				indexColumn = VERTICAL[moveNumber];
+			};//fim da sentença de iteração while
+			
+			System.out.printf("%s:%d%n%s:%d", "Nova linha", indexRow, "Nova coluna", indexColumn);
+			
+		} else if ( (prevIndexRow == PosicoesCriticas.B8.getIndexRow() && prevIndexColumn == PosicoesCriticas.B8.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.C8.getIndexRow() && prevIndexColumn == PosicoesCriticas.C8.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.D8.getIndexRow() && prevIndexColumn == PosicoesCriticas.D8.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.E8.getIndexRow() && prevIndexColumn == PosicoesCriticas.E8.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.F8.getIndexRow() && prevIndexColumn == PosicoesCriticas.F8.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.G8.getIndexRow() && prevIndexColumn == PosicoesCriticas.G8.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.H8.getIndexRow() && prevIndexColumn == PosicoesCriticas.H8.getIndexColumn()))
+		{
+			//Se estiver no canto superior não são válidos valores: 0, 1, 2, 3
+			int moveNumber = randomNumber.nextInt(0, 8);
+			while ( moveNumber <= 3 )
+			{
+				moveNumber = randomNumber.nextInt(0, 8);
+				//System.out.printf("%d%n", moveNumber);
+				indexRow = HORIZONTAL[moveNumber];
+				indexColumn = VERTICAL[moveNumber];
+			};//fim da sentença de iteração while
+				
+			System.out.printf("%s:%d%n%s:%d", "Nova linha", indexRow, "Nova coluna", indexColumn);
+			
+		} else if ((prevIndexRow == PosicoesCriticas.H7.getIndexRow() && prevIndexColumn == PosicoesCriticas.H7.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.H6.getIndexRow() && prevIndexColumn == PosicoesCriticas.H6.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.H5.getIndexRow() && prevIndexColumn == PosicoesCriticas.H5.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.H4.getIndexRow() && prevIndexColumn == PosicoesCriticas.H4.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.H3.getIndexRow() && prevIndexColumn == PosicoesCriticas.H3.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.H2.getIndexRow() && prevIndexColumn == PosicoesCriticas.H2.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.H1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H1.getIndexColumn()))
+		{
+			//Se estiver no canto direito não são válidos valores: 0, 1, 6, 7
+			int moveNumber = randomNumber.nextInt(0, 8);
+			while ( moveNumber > 2 && moveNumber < 5 )
+			{
+				moveNumber = randomNumber.nextInt(0, 8);
+				System.out.printf("%d%n", moveNumber);
+				indexRow = HORIZONTAL[moveNumber];
+				indexColumn = VERTICAL[moveNumber];
+			};//fim da sentença de iteração while
+			
+				System.out.printf("%s:%d%n%s:%d", "Nova linha", indexRow, "Nova coluna", indexColumn);
+					
+		} else if ((prevIndexRow == PosicoesCriticas.G1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H7.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.F1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H6.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.E1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H5.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.D1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H4.getIndexColumn()) || 
+			(prevIndexRow == PosicoesCriticas.C1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H3.getIndexColumn()) ||
+			(prevIndexRow == PosicoesCriticas.B1.getIndexRow() && prevIndexColumn == PosicoesCriticas.H2.getIndexColumn()))
+		{
+				//Posições no canto inferior do tabuleiro. Não são válidos valores: 4, 5, 6, 7
+				int moveNumber = randomNumber.nextInt(0, 8);
+				while ( moveNumber > 3 )
+				{
+					moveNumber = randomNumber.nextInt(0, 8);
+					//System.out.printf("%d%n", moveNumber);
+					indexRow = HORIZONTAL[moveNumber];
+					indexColumn = VERTICAL[moveNumber];
+				};//fim da sentença de iteração while
+					
+				System.out.printf("%s:%d%n%s:%d", "Nova linha", indexRow, "Nova coluna", indexColumn);
+		};//fim da sentença de seleção condicional composta
+		
 	};//fim do método nextPosition()
 	
-	private static String checkBoardBoundary(String[][]arr, String currentKnightPosition)
+	private static int[] checkBoardBoundary(String[][]arr, String currentKnightPosition)
 	{
-			
 		//Recupera os índices da posição atual do cavalo no tabuleiro
 		int prevIndexRow = indexRow(arr, currentKnightPosition);
 		int prevIndexColumn = indexColumn(arr, currentKnightPosition);
+		boolean prevKnightPosition = (prevIndexRow == prevIndexRow && prevIndexColumn == prevIndexColumn); //Utilizado para identificar a posição
+		int[]prevIndexRowAndColumn = new int[2]; //array para armazenar o valor da linha e coluna no formato: linha ([0]), coluna([1])
 		
 		//Críticas, canto esquerdo
 		boolean a1 = (prevIndexRow == PosicoesCriticas.A1.getIndexRow() && prevIndexColumn == PosicoesCriticas.A1.getIndexColumn());
@@ -209,6 +290,7 @@ public class PasseioDoCavalo
 		boolean a6 = (prevIndexRow == PosicoesCriticas.A6.getIndexRow() && prevIndexColumn == PosicoesCriticas.A6.getIndexColumn());
 		boolean a7 = (prevIndexRow == PosicoesCriticas.A7.getIndexRow() && prevIndexColumn == PosicoesCriticas.A7.getIndexColumn());
 		boolean a8 = (prevIndexRow == PosicoesCriticas.A8.getIndexRow() && prevIndexColumn == PosicoesCriticas.A8.getIndexColumn());
+	
 		//Críticas, canto superior
 		boolean b8 = (prevIndexRow == PosicoesCriticas.B8.getIndexRow() && prevIndexColumn == PosicoesCriticas.B8.getIndexColumn());
 		boolean c8 = (prevIndexRow == PosicoesCriticas.C8.getIndexRow() && prevIndexColumn == PosicoesCriticas.C8.getIndexColumn());
@@ -233,29 +315,30 @@ public class PasseioDoCavalo
 		boolean f1 = (prevIndexRow == PosicoesCriticas.F1.getIndexRow() && prevIndexColumn == PosicoesCriticas.F1.getIndexColumn());
 		boolean g1 = (prevIndexRow == PosicoesCriticas.G1.getIndexRow() && prevIndexColumn == PosicoesCriticas.G1.getIndexColumn());
 		
-		//Verifica se o valor de prevIndexRow e prevIndexColumn é igual a um dos valores críticos
-		if (a1 || a2 || a3 || a4 || a5 || a6 || a7 || a8)
+		//Array de todas as posições críticas
+		boolean[] todasPosicoesCriticas = {a1, b1, c1, d1, e1, f1, g1, h1, h2, h3, h4, h5, h6, h7, h8, f8, g8, e8, d8, c8, b8, a8, a7, a6, a5, a4, a3, a2};
+		
+		for (int i = 0; i < todasPosicoesCriticas.length; i+=1)
 		{
-			//Gera uma string para retornar ao método chamador
-			String cantoEsquerdo = "Canto esquerdo";
-			return cantoEsquerdo;
-		} else if (b8 || c8 || d8 || e8 || f8 || g8 || h8)
-		{
-			//Gera uma string para retornar ao método chamador
-			String cantoSuperior = "Canto superior";
-			return cantoSuperior;
-		} else if (h1 || h2 || h3 || h4 || h5 || h6 || h7)
-		{
-			//Gera uma string para retornar ao método chamador
-			String cantoDireito = "Canto direito";
-			return cantoDireito;
-		} else if (b1 || c1 || d1 || e1 || f1 || g1)
-		{
-			//Gera uma string para retornar ao método chamador
-			String cantoInferior = "Canto Inferior";
-			return cantoInferior;
-		}//fim da sentença de seleção condicional composta aninhada
-		return null;
+			if (prevKnightPosition == todasPosicoesCriticas[i])
+			{
+				prevIndexRowAndColumn[0] = prevIndexRow;
+				prevIndexRowAndColumn[1] = prevIndexColumn;
+				break;
+			}//fim da sentença de seleção condicional simples
+		};//fim da sentença de iteração for
+		
+		return prevIndexRowAndColumn;
 	};//fim do método checkBoardBoundary(String currentKnightPosition)
+
+	private static int decomposeArrayRow(int[]arr)
+	{
+		return arr[0];
+	};//fim do método decomposeArrayRow(int[]arr);
+	
+	private static int decomposeArrayColumn(int[]arr)
+	{
+		return arr[1];
+	};//fim do método decomposeArrayColumn(int[]arr);
 	
 };//fim da classe PasseioDoCavalo

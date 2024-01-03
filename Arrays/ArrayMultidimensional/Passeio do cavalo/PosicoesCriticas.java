@@ -16,8 +16,7 @@ public enum PosicoesCriticas
 	//As posições críticas no canto direito do tabuleiro. Não são permitidos movimentos à direita (números positivos de coluna0
 	H7("H7", 1, 7), H6("H6", 2, 7), H5("H5", 3, 7), H4("H4", 4, 7), H3("H3", 5, 7), H2("H2", 6, 7), H1("H1", 7, 7),
 	//As posições críticas no canto inferior do tabuleiro. Não são permitidos movimentos para baixo (números positivos de linha)
-	G1("G1", 6, 7), F1("F1", 5, 7), E1("E1", 4, 7), D1("D1", 3, 7), C1("C1", 2, 7), B1("B1", 1, 7);
-	
+	G1("G1", 7, 6), F1("F1", 7, 5), E1("E1", 7, 4), D1("D1", 7, 3), C1("C1", 7, 2), B1("B1", 7, 1);
 	
 	/**Campos*/
 	private String posicao;
