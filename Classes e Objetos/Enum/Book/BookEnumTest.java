@@ -15,7 +15,7 @@ public class BookEnumTest
 		//O método estático values() é gerado pelo compilador e retorna um array das constantes enum na ordem em que foram declaradas.
 		for (Book book : Book.values())
 		{
-			//Repara que a chamada book retorna o identificador da constante enum
+			//Repare que a chamada book retorna o identificador da constante enum
 			System.out.printf("%-10s%-45s%s%n", book, book.getTitle(), book.getCopyrightYear());
 		};//fim da instrução for aprimorado
 		
