@@ -64,22 +64,26 @@ public class PasseioDoCavalo
 		
 		while (contador != 64)
 		{
-			
 			int currentRow = decomposeArrayRow(initialPosition);
 			int currentColumn = decomposeArrayColumn(initialPosition);
 			
-			//Verificar onde inserir uma verificação das posições já visitadas pelo cavalo
-			
+			//if
+			if (board[currentRow][currentColumn] == "K" || board[currentRow][currentColumn] == "k")
+			{
+				int[]arr1 = nextPosition(initialPosition);
+				currentRow+=decomposeArrayRow(arr1);
+				currentColumn+=decomposeArrayColumn(arr1);
+				initialPosition[0] = currentRow;
+				initialPosition[1] = currentColumn;
+			}
+					
 			board[currentRow][currentColumn] = "K";
 			System.out.printf("1) Current row: %d%nCurrent column: %d%n", currentRow, currentColumn);
 			
 			//Visualizando o tabuleiro
 			print(board);
-						
+			
 			int[]arr1 = nextPosition(initialPosition);
-			
-			
-			
 			
 			currentRow+=decomposeArrayRow(arr1);
 			currentColumn+=decomposeArrayColumn(arr1);
@@ -94,7 +98,7 @@ public class PasseioDoCavalo
 			initialPosition[0] = currentRow;
 			initialPosition[1] = currentColumn;
 			
-			//System.out.printf("3) Current row: %d%nCurrent column: %d%n", currentRow, currentColumn);
+			System.out.printf("3) Current row: %d%nCurrent column: %d%n", currentRow, currentColumn);
 			contador+=1;
 		};//fim da sentença de iteração while
 		
@@ -154,6 +158,7 @@ public class PasseioDoCavalo
 				moveNumber = randomNumber.nextInt(0, 8);
 				
 				//Verificação de B7
+				//checkForB7(decomposeArrayRow(arr), decomposeArrayColumn(arr));
 				if (positionLeft.B7.getIndexRow() == decomposeArrayRow(arr) && positionLeft.B7.getIndexColumn() == decomposeArrayColumn(arr))
 				{
 					while (moveNumber >= 1 || moveNumber >= 6 )
@@ -238,10 +243,10 @@ public class PasseioDoCavalo
 		{
 			if (positionBottom.getIndexRow() == decomposeArrayRow(arr) && positionBottom.getIndexColumn() == decomposeArrayColumn(arr))
 			{
-			//Posições no canto inferior do tabuleiro. Não são válidos valores: 4, 5, 6, 7
+			//Posições no canto inferior do tabuleiro. Não são válidos valores: 3, 4, 5, 6, 7
 			moveNumber = randomNumber.nextInt(0, 8);
 			
-			while (moveNumber >= 4)
+			while (moveNumber >= 3)
 			{
 				moveNumber = randomNumber.nextInt(0, 8);
 			};//fim da sentença de iteração while
@@ -249,86 +254,7 @@ public class PasseioDoCavalo
 			nextPositionRowAndColumn[1] = HORIZONTAL[moveNumber];
 			return nextPositionRowAndColumn;
 			}//fim da sentença de seleção condicional simples
-		}//fim da sentença de iteração for aprimorada
-		
-	/*	
-		//Inserir cuidados com as bordas internas
-		//Canto esquerdo (internas)
-		for (PosicoesCriticas positionLeft : EnumSet.range(PosicoesCriticas.B2, PosicoesCriticas.B7))
-		{
-			if (positionLeft.getIndexRow() == decomposeArrayRow(arr) && positionLeft.getIndexColumn() == decomposeArrayColumn(arr))
-			{
-				//Se estiver no canto esquerdo não são válidas as posições de índice: 3, 4 
-				moveNumber = randomNumber.nextInt(0, 8);
-				
-				while (moveNumber >= 3 && moveNumber <= 4)
-				{
-					moveNumber = randomNumber.nextInt(0, 8);
-				};//fim da sentença de iteração while
-				nextPositionRowAndColumn[0] = VERTICAL[moveNumber];
-				nextPositionRowAndColumn[1] = HORIZONTAL[moveNumber];
-				 
-				return nextPositionRowAndColumn;
-			}//fim da sentença de seleção condicional simples
-		}//fim da sentença de iteração for aprimorada
-		
-		//Canto direito (internas)
-		for (PosicoesCriticas positionRight : EnumSet.range(PosicoesCriticas.G2, PosicoesCriticas.G6))
-		{
-			if (positionRight.getIndexRow() == decomposeArrayRow(arr) && positionRight.getIndexColumn() == decomposeArrayColumn(arr))
-			{
-				//Se estiver no canto direito não são válidos valores: 0, 7
-				moveNumber = randomNumber.nextInt(0, 8);
-					
-				while (moveNumber == 0 || moveNumber == 7)
-				{
-					moveNumber = randomNumber.nextInt(0, 8);
-				};//fim da sentença de iteração while
-				nextPositionRowAndColumn[0] = VERTICAL[moveNumber];
-				nextPositionRowAndColumn[1] = HORIZONTAL[moveNumber];
-						
-				return nextPositionRowAndColumn;
-			}//fim da sentença de seleção condicional simples
-		}//fim da sentença de iteração for aprimorada
-		
-		//Canto superior (internas)
-		for (PosicoesCriticas positionTop : EnumSet.range(PosicoesCriticas.C7, PosicoesCriticas.G7))
-		{
-			if (positionTop.getIndexRow() == decomposeArrayRow(arr) && positionTop.getIndexColumn() == decomposeArrayColumn(arr))
-			{
-				//Se estiver no canto superior não são válidos valores: 1, 2
-				moveNumber = randomNumber.nextInt(0, 8);
-					
-				while (moveNumber >= 1 && moveNumber <= 2)
-				{
-					moveNumber = randomNumber.nextInt(0, 8);
-				};//fim da sentença de iteração while
-						
-				nextPositionRowAndColumn[0] = VERTICAL[moveNumber];
-				nextPositionRowAndColumn[1] = HORIZONTAL[moveNumber];
-					
-				return nextPositionRowAndColumn;
-			}//fim da sentença de seleção condicional simples
-		}//fim da sentença de iteração for aprimorada		
-		
-		//Canto inferior (internas)
-		for (PosicoesCriticas positionBottom : EnumSet.range(PosicoesCriticas.C2, PosicoesCriticas.F2))
-		{
-			if (positionBottom.getIndexRow() == decomposeArrayRow(arr) && positionBottom.getIndexColumn() == decomposeArrayColumn(arr))
-			{
-				//Posições no canto inferior do tabuleiro. Não são válidos valores: 5, 6
-				moveNumber = randomNumber.nextInt(0, 8);
-					
-				while (moveNumber >= 5 && moveNumber <= 6)
-				{
-					moveNumber = randomNumber.nextInt(0, 8);
-				};//fim da sentença de iteração while
-				nextPositionRowAndColumn[0] = VERTICAL[moveNumber];
-				nextPositionRowAndColumn[1] = HORIZONTAL[moveNumber];
-				return nextPositionRowAndColumn;
-			}//fim da sentença de seleção condicional simples
-		}//fim da sentença de iteração for aprimorada
-	*/		
+		}//fim da sentença de iteração for aprimorada	
 		
 		//Se nenhuma condição for aceita retornar na posição padrão
 		nextPositionRowAndColumn[0] = VERTICAL[moveNumber];
