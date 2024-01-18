@@ -67,15 +67,23 @@ public class PasseioDoCavalo
 			int currentRow = decomposeArrayRow(initialPosition);
 			int currentColumn = decomposeArrayColumn(initialPosition);
 			
-			//if
-			if (board[currentRow][currentColumn] == "K" || board[currentRow][currentColumn] == "k")
+			//if para verificar se a posição de currentRow e currentColumn já está ocupada, i.e., o cavalo já passou por lá
+			if (board[currentRow][currentColumn] == "K")
 			{
-				int[]arr1 = nextPosition(initialPosition);
-				currentRow+=decomposeArrayRow(arr1);
-				currentColumn+=decomposeArrayColumn(arr1);
-				initialPosition[0] = currentRow;
-				initialPosition[1] = currentColumn;
-			}
+				
+				while (board[currentRow][currentColumn] == "K")
+				{
+					int[]arr1 = nextPosition(initialPosition);
+							
+					currentRow+=decomposeArrayRow(arr1);
+					currentColumn+=decomposeArrayColumn(arr1);
+					
+					initialPosition[0] = currentRow;
+					initialPosition[1] = currentColumn;
+					
+					board[currentRow][currentColumn] = "k";
+				};//fim da sentença de iteração while
+			};//fim da sentença de seleção condicional simples
 					
 			board[currentRow][currentColumn] = "K";
 			System.out.printf("1) Current row: %d%nCurrent column: %d%n", currentRow, currentColumn);
@@ -91,9 +99,9 @@ public class PasseioDoCavalo
 			System.out.printf("2) Current row: %d%nCurrent column: %d%n", currentRow, currentColumn);
 			System.out.println();
 			
-			board[currentRow][currentColumn] = "k";
+			//board[currentRow][currentColumn] = "k";
 			
-			print(board);
+			//print(board);
 			
 			initialPosition[0] = currentRow;
 			initialPosition[1] = currentColumn;
@@ -102,6 +110,9 @@ public class PasseioDoCavalo
 			contador+=1;
 		};//fim da sentença de iteração while
 		
+		//teste
+		int[] a = {2, 2};
+		nextPositionAccess(a);
 		
 		
 	};//fim do método main
@@ -243,10 +254,10 @@ public class PasseioDoCavalo
 		{
 			if (positionBottom.getIndexRow() == decomposeArrayRow(arr) && positionBottom.getIndexColumn() == decomposeArrayColumn(arr))
 			{
-			//Posições no canto inferior do tabuleiro. Não são válidos valores: 3, 4, 5, 6, 7
+			//Posições no canto inferior do tabuleiro. Não são válidos valores: 0, 3, 4, 5, 6, 7
 			moveNumber = randomNumber.nextInt(0, 8);
 			
-			while (moveNumber >= 3)
+			while (moveNumber >= 3 || moveNumber == 0)
 			{
 				moveNumber = randomNumber.nextInt(0, 8);
 			};//fim da sentença de iteração while
@@ -271,5 +282,126 @@ public class PasseioDoCavalo
 	{
 		return arr[1];
 	};//fim do método decomposeArrayColumn(int[]arr);
+	
+	private static void nextPositionAccess(int[]arr)
+	{
+		/**Se o cavalo estiver em C6 ele tem acesso as casas: B8 (3) A7 (3) A5 (4) B4 (4) D4 (8) E5(8) E7 (6) D8 (4)
+		 * De acordo com a heurística da acessibilidade o cavalo deve se mover preferencialmente para B8 ou A7.
+		 * 
+		 * A ideia é:
+		 * 
+		 * 1. Iniciamos com a geração de uma posição aleatória para o cavalo (recebe como argumento)
+		 * 2. Primeiro armazenamos o índice de acessibilidade da posição. 
+		 * 3. Depois do for usamos um switch. Esse switch avalia a variável que armazena o valor do índice de acessibilidade da
+		 * posição atual.Os case (8, 6, 4, 3, 2). Para cada case nós geramos todas as posições possíveis utilizando os arrays HOZIONTAL e VERTICAL.
+		 * 4. A partir de todas as posições possíveis nós extraímos o valor de índice de cada uma.
+		 * 5. Esse valor de índice será então comparado e o menor valor determinará a posição que o cavalo se moverá.
+		 * 6. Ao sair do swtich os valores da posição atual serão utilizados para refazer o processo.
+		 * 
+		 * */
+		
+		//1
+		int currentRow = decomposeArrayRow(arr);
+		int currentColumn = decomposeArrayColumn(arr);
+		int accessIndex = 0;
+		System.out.printf("Valor de currentRow e currentColumn no início do método: %d / %d%n", currentRow, currentColumn);
+		//2
+		for (PosicoesAcessibilidade currentPosition : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
+		{
+			if (currentRow == currentPosition.getRow() && currentColumn == currentPosition.getColumn())
+			{
+				accessIndex = currentPosition.getAccess();
+			};//fim da sentença de seleção condicional simples
+		};//fim da sentença de iteração for aprimorado
+		//System.out.printf("Valor de índice inicial da posição C6: %d%n", accessIndex);
+		
+		//3
+		switch(accessIndex)
+		{
+			case 8:
+				
+				//System.out.printf("Valor de índice inicial da posição C6 dentro do switch: %d%n", accessIndex);
+				//System.out.printf("Valor de currentRow e currentColumn dentro do switch: %d / %d%n", currentRow, currentColumn);
+				//Definindo as casas passíveis de ser alcançadas. Os valores de cada array são diferentes e indicam as coordenadas
+				//da nova posição do cavalo.
+				int cr1 = decomposeArrayRow(arr);
+				int cc1 = decomposeArrayRow(arr);
+				
+				cr1+=MovimentosCavalo.Mov0.getRow();
+				cc1+=MovimentosCavalo.Mov0.getColumn();
+				int[] position1 = {cr1, cc1}; //Nessas variáveis temos a nova casa ocupada pelo cavalo
+				System.out.printf("Valor de position1: %d / %d%n", position1[0], position1[1]);
+				System.out.printf("Valor de currentRow e currentColumn dentro do switch: %d / %d%n", currentRow, currentColumn);
+				
+				
+				int cr2 = decomposeArrayRow(arr);
+				int cc2 = decomposeArrayRow(arr);
+				cr2+=MovimentosCavalo.Mov1.getRow();
+				cc2+=MovimentosCavalo.Mov1.getColumn();
+				int[] position2 = {cr2, cc2};
+				System.out.printf("Valor de position2: %d / %d%n", position2[0], position2[1]);
+				System.out.printf("Valor de currentRow e currentColumn dentro do switch: %d / %d%n", currentRow, currentColumn);
+				
+				
+				currentRow+=MovimentosCavalo.Mov2.getRow();
+				currentColumn+=MovimentosCavalo.Mov2.getColumn();
+				int[] position3 = {currentRow, currentColumn};
+				
+				currentRow+=MovimentosCavalo.Mov3.getRow();
+				currentColumn+=MovimentosCavalo.Mov3.getColumn();
+				int[] position4 = {currentRow, currentColumn};
+				
+				currentRow+=MovimentosCavalo.Mov4.getRow();
+				currentColumn+=MovimentosCavalo.Mov4.getColumn();
+				int[] position5 = {currentRow, currentColumn};
+				
+				currentRow+=MovimentosCavalo.Mov5.getRow();
+				currentColumn+=MovimentosCavalo.Mov5.getColumn();
+				int[] position6 = {currentRow, currentColumn};
+				
+				currentRow+=MovimentosCavalo.Mov6.getRow();
+				currentColumn+=MovimentosCavalo.Mov6.getColumn();
+				int[] position7 = {currentRow, currentColumn};
+				
+				currentRow+=MovimentosCavalo.Mov7.getRow();
+				currentColumn+=MovimentosCavalo.Mov7.getColumn();
+				int[] position8 = {currentRow, currentColumn};
+				
+				//Iterar pelas posições de acessibilidade para encontrar o menor índice de acordo com as 8 posições
+				int accessIndexP1 = 0;
+				int accessIndexP2 = 0;
+				int accessIndexP3 = 0;
+				int accessIndexP4 = 0;
+				int accessIndexP5 = 0;
+				int accessIndexP6 = 0;
+				int accessIndexP7 = 0;
+				int accessIndexP8 = 0;
+				
+				for (PosicoesAcessibilidade p : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
+				{
+					if (p.getRow() == decomposeArrayRow(position1) && p.getColumn() == decomposeArrayColumn(position1))
+					{
+						accessIndexP1 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+				};//fim da sentença de iteração for aprimorado
+				
+				for (PosicoesAcessibilidade p : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
+				{
+					if (p.getRow() == decomposeArrayRow(position2) && p.getColumn() == decomposeArrayColumn(position2))
+					{
+						accessIndexP2 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+				};//fim da sentença de iteração for aprimorado
+				
+				
+				
+				System.out.printf("índices: %d / %d / %d / %d / %d / %d / %d / %d", accessIndexP1, accessIndexP2, accessIndexP3, accessIndexP4, accessIndexP5, accessIndexP6, accessIndexP7, accessIndexP8);
+				
+				//Enquanto o valor de índice da posição não for o menor, ele fica buscando essa casa
+				
+			break;
+		};//fim da sentença de seleção múltipla
+		
+	};//fim do método nextPositionAccess(int[]arr)
 	
 };//fim da classe PasseioDoCavalo
