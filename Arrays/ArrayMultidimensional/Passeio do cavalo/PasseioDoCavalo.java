@@ -41,6 +41,7 @@ fez?
 
 import java.util.EnumSet;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class PasseioDoCavalo
 {
@@ -111,7 +112,7 @@ public class PasseioDoCavalo
 		};//fim da sentença de iteração while
 		
 		//teste
-		int[] a = {2, 2};
+		int[] a = {4, 4};
 		nextPositionAccess(a);
 		
 		
@@ -289,6 +290,7 @@ public class PasseioDoCavalo
 		 * De acordo com a heurística da acessibilidade o cavalo deve se mover preferencialmente para B8 ou A7.
 		 * 
 		 * A ideia é:
+		 * --deixar o método de retorno como int[]
 		 * 
 		 * 1. Iniciamos com a geração de uma posição aleatória para o cavalo (recebe como argumento)
 		 * 2. Primeiro armazenamos o índice de acessibilidade da posição. 
@@ -304,7 +306,7 @@ public class PasseioDoCavalo
 		int currentRow = decomposeArrayRow(arr);
 		int currentColumn = decomposeArrayColumn(arr);
 		int accessIndex = 0;
-		System.out.printf("Valor de currentRow e currentColumn no início do método: %d / %d%n", currentRow, currentColumn);
+		
 		//2
 		for (PosicoesAcessibilidade currentPosition : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
 		{
@@ -326,47 +328,53 @@ public class PasseioDoCavalo
 				//da nova posição do cavalo.
 				int cr1 = decomposeArrayRow(arr);
 				int cc1 = decomposeArrayRow(arr);
-				
 				cr1+=MovimentosCavalo.Mov0.getRow();
 				cc1+=MovimentosCavalo.Mov0.getColumn();
 				int[] position1 = {cr1, cc1}; //Nessas variáveis temos a nova casa ocupada pelo cavalo
-				System.out.printf("Valor de position1: %d / %d%n", position1[0], position1[1]);
-				System.out.printf("Valor de currentRow e currentColumn dentro do switch: %d / %d%n", currentRow, currentColumn);
-				
 				
 				int cr2 = decomposeArrayRow(arr);
 				int cc2 = decomposeArrayRow(arr);
 				cr2+=MovimentosCavalo.Mov1.getRow();
 				cc2+=MovimentosCavalo.Mov1.getColumn();
 				int[] position2 = {cr2, cc2};
-				System.out.printf("Valor de position2: %d / %d%n", position2[0], position2[1]);
-				System.out.printf("Valor de currentRow e currentColumn dentro do switch: %d / %d%n", currentRow, currentColumn);
 				
+				int cr3 = decomposeArrayRow(arr);
+				int cc3 = decomposeArrayRow(arr);
+				cr3+=MovimentosCavalo.Mov2.getRow();
+				cc3+=MovimentosCavalo.Mov2.getColumn();
+				int[] position3 = {cr3, cc3};
 				
-				currentRow+=MovimentosCavalo.Mov2.getRow();
-				currentColumn+=MovimentosCavalo.Mov2.getColumn();
-				int[] position3 = {currentRow, currentColumn};
+				int cr4 = decomposeArrayRow(arr);
+				int cc4 = decomposeArrayRow(arr);
+				cr4+=MovimentosCavalo.Mov3.getRow();
+				cc4+=MovimentosCavalo.Mov3.getColumn();
+				int[] position4 = {cr4, cc4};
 				
-				currentRow+=MovimentosCavalo.Mov3.getRow();
-				currentColumn+=MovimentosCavalo.Mov3.getColumn();
-				int[] position4 = {currentRow, currentColumn};
+				int cr5 = decomposeArrayRow(arr);
+				int cc5 = decomposeArrayRow(arr);
+				cr5+=MovimentosCavalo.Mov4.getRow();
+				cc5+=MovimentosCavalo.Mov4.getColumn();
+				int[] position5 = {cr5, cc5};	
 				
-				currentRow+=MovimentosCavalo.Mov4.getRow();
-				currentColumn+=MovimentosCavalo.Mov4.getColumn();
-				int[] position5 = {currentRow, currentColumn};
+				int cr6 = decomposeArrayRow(arr);
+				int cc6 = decomposeArrayRow(arr);
+				cr6+=MovimentosCavalo.Mov5.getRow();
+				cc6+=MovimentosCavalo.Mov5.getColumn();
+				int[] position6 = {cr6, cc6};
 				
-				currentRow+=MovimentosCavalo.Mov5.getRow();
-				currentColumn+=MovimentosCavalo.Mov5.getColumn();
-				int[] position6 = {currentRow, currentColumn};
+				int cr7 = decomposeArrayRow(arr);
+				int cc7 = decomposeArrayRow(arr);
+				cr7+=MovimentosCavalo.Mov6.getRow();
+				cc7+=MovimentosCavalo.Mov6.getColumn();
+				int[] position7 = {cr7, cc7};
 				
-				currentRow+=MovimentosCavalo.Mov6.getRow();
-				currentColumn+=MovimentosCavalo.Mov6.getColumn();
-				int[] position7 = {currentRow, currentColumn};
+				int cr8 = decomposeArrayRow(arr);
+				int cc8 = decomposeArrayRow(arr);
+				cr8+=MovimentosCavalo.Mov7.getRow();
+				cc8+=MovimentosCavalo.Mov7.getColumn();
+				int[] position8 = {cr8, cc8};
 				
-				currentRow+=MovimentosCavalo.Mov7.getRow();
-				currentColumn+=MovimentosCavalo.Mov7.getColumn();
-				int[] position8 = {currentRow, currentColumn};
-				
+				//4
 				//Iterar pelas posições de acessibilidade para encontrar o menor índice de acordo com as 8 posições
 				int accessIndexP1 = 0;
 				int accessIndexP2 = 0;
@@ -379,25 +387,74 @@ public class PasseioDoCavalo
 				
 				for (PosicoesAcessibilidade p : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
 				{
+					
 					if (p.getRow() == decomposeArrayRow(position1) && p.getColumn() == decomposeArrayColumn(position1))
 					{
 						accessIndexP1 = p.getAccess();
 					};//fim da sentença de seleção condicional simples
-				};//fim da sentença de iteração for aprimorado
-				
-				for (PosicoesAcessibilidade p : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
-				{
+					
 					if (p.getRow() == decomposeArrayRow(position2) && p.getColumn() == decomposeArrayColumn(position2))
 					{
 						accessIndexP2 = p.getAccess();
 					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position3) && p.getColumn() == decomposeArrayColumn(position3))
+					{
+						accessIndexP3 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position4) && p.getColumn() == decomposeArrayColumn(position4))
+					{
+						accessIndexP4 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position5) && p.getColumn() == decomposeArrayColumn(position5))
+					{
+						accessIndexP5 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position6) && p.getColumn() == decomposeArrayColumn(position6))
+					{
+						accessIndexP6 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position7) && p.getColumn() == decomposeArrayColumn(position7))
+					{
+						accessIndexP7 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
+					
+					if (p.getRow() == decomposeArrayRow(position8) && p.getColumn() == decomposeArrayColumn(position8))
+					{
+						accessIndexP8 = p.getAccess();
+					};//fim da sentença de seleção condicional simples
 				};//fim da sentença de iteração for aprimorado
 				
+				System.out.printf("Valores: %d / %d / %d / %d / %d / %d / %d / %d /", accessIndexP1, accessIndexP2, accessIndexP3, accessIndexP4,
+						accessIndexP5, accessIndexP6, accessIndexP7, accessIndexP8);
 				
+				//5
+				//Nos arrayList eu tenho os índices e suas posições. Isso me permite selecionar qual posição ir quando houver mais de 1 menor
+				int[] allAccessIndex = {accessIndexP1,accessIndexP2,accessIndexP3,accessIndexP4,accessIndexP5,accessIndexP6,accessIndexP7,accessIndexP8}; 
+				int maxValue = Integer.MAX_VALUE;
+				ArrayList<Integer> allMinAccessValues = new ArrayList<Integer>();
+				ArrayList<Integer> allMinAccessValuesIndex = new ArrayList<Integer>();
 				
-				System.out.printf("índices: %d / %d / %d / %d / %d / %d / %d / %d", accessIndexP1, accessIndexP2, accessIndexP3, accessIndexP4, accessIndexP5, accessIndexP6, accessIndexP7, accessIndexP8);
+				for(int i = 0; i < allAccessIndex.length; i+=1)
+				{
+					if (allAccessIndex[i] <= maxValue)
+					{
+						maxValue = allAccessIndex[i];
+						allMinAccessValues.add(maxValue);
+						allMinAccessValuesIndex.add(i);
+					};//fim da sentença de seleção condicional simples
+				};//fim da sentença de iteração for
 				
-				//Enquanto o valor de índice da posição não for o menor, ele fica buscando essa casa
+				//6
+				//Descobrir qual é o array (position1...8) para retornar
+				for (PosicoesAcessibilidade p : EnumSet.range(PosicoesAcessibilidade.C3, PosicoesAcessibilidade.H8))
+				{
+					//
+				};//fim da sentença de iteração for aprimorado
 				
 			break;
 		};//fim da sentença de seleção múltipla
