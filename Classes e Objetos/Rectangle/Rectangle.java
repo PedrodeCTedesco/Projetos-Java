@@ -10,8 +10,8 @@ public class Rectangle
 		//Instanciando 4 objetos
 		RectangleObject rec1 = new RectangleObject(); //deve inicializar com os valores padrão
 		RectangleObject rec2 = new RectangleObject(3.2, 12.7);
-		//RectangleObject rec3 = new RectangleObject(3.4, 22.7); //deve lançar um erro
-		//RectangleObject rec4 = new RectangleObject(-3.4, 5.21); //deve lançar um erro
+		//RectangleObject rec3 = new RectangleObject(3.4, 22.7); //deve lançar um erro quando descomentado
+		//RectangleObject rec4 = new RectangleObject(-3.4, 5.21); //deve lançar um erro quando descomentado
 		
 		//Testando os métodos de consulta
 		System.out.printf("Valores de length e width de rec1:%nLength rec1: %.2f%nWidth rec1: %.2f%n", rec1.getLength(), rec1.getWidth());
@@ -24,7 +24,8 @@ public class Rectangle
 		rec2.setLength(17);
 		rec2.setWidth(11);
 		
-		//System.out.printf("Alterando os valores de length e width de rec2 com valores inválidos:%n");
+		System.out.printf("Alterando os valores de length e width de rec1:%nLength de rec2: %.1f%nWidth de rec1: %.1f%n", rec1.getLength(), rec1.getWidth());
+		System.out.printf("Alterando os valores de length e width de rec2:%nLength de rec2: %.1f%nWidth de rec2: %.1f%n", rec2.getLength(), rec2.getWidth());
 		//rec2.setLength(321);
 		//rec2.setWidth(-123);
 		
@@ -56,7 +57,7 @@ class RectangleObject
 		this(1.0, 1.0);
 	};//fim do construtor
 	
-	public RectangleObject (double lenght, double width)
+	public RectangleObject (double length, double width)
 	{
 		//Verificação dos valores passados
 		if (length < 0.0 || length > 20.0)
