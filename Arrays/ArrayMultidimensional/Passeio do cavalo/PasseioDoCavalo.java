@@ -128,12 +128,8 @@ public class PasseioDoCavalo
 	private static final int[] HORIZONTAL = {2, 1, -1, -2, -2, -1, 1, 2}; //mudança de coluna
 	private static final int[] VERTICAL = {-1, -2, -2, -1, 1, 2, 2, 1}; //mudança de linha
 	
-	/**MÉTODOS
-	 * -print(String[][]arr): void --> exibe o tabuleiro de xadrez.
-	 * @param String[][] --> um array bidimensional de Strings
-	 * Runtime: O(N^2);
-	 * Complexidade de espaço: O(N^2);
-	 * */
+	/**Métodos implementação */
+	
  	private static void print(String[][] arr)
 	{
 		//Visualizando todas as casas do tabuleiro
