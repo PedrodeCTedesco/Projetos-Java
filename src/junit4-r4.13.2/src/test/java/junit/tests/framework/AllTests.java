@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
  * TestSuite that runs all the sample tests
  */
 public class AllTests {
-
+	
     public static void main(String[] args) {
         junit.textui.TestRunner.run(suite());
     }

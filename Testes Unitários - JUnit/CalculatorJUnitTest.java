@@ -1,7 +1,7 @@
 
 
 import static org.junit.Assert.*;
-import org.junit.Test;
+import static junit.tests.framework.*;
 
 public class CalculatorTest
 {

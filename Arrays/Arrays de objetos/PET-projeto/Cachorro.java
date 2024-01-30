@@ -5,7 +5,7 @@ public class Cachorro extends Pet
 	{
 		super(nome, idade);
 	}
-	
+	@Test
 	public void latir()
 	{
 		System.out.println("Au au");
