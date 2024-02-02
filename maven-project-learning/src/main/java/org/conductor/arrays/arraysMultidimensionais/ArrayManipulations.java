@@ -1,30 +1,32 @@
 package org.conductor.arrays.arraysMultidimensionais;
 
+import java.util.Arrays;
+
 public class ArrayManipulations
 {
     public static void main (String[] args)
     {
         //sort the double array using sort(). This sorts the array in ascending order
-        System.out.printf("O método sort() para classificar os elementos do array em ordem crescente");
+        System.out.printf("%s", "O método sort() para classificar os elementos do array em ordem crescente");
 
-        int[] intArrayInicial = {3, 7, 1, 7, 8, 4, 9, 3, 6, 5, 3, 9, 2, 10, 6, 8, 4, 2,3, 6, 1, 0};
+        int[] initialArrOfIntegers = {3, 7, 1, 7, 8, 4, 9, 3, 6, 5, 3, 9, 2, 10, 6, 8, 4, 2,3, 6, 1, 0};
         System.out.printf("%nA ordem dos elementos do array antes do método sort():");
-        displayArray(intArrayInicial, "intArrayInicial");
+        displayArray(initialArrOfIntegers, "initialArrOfIntegers");
 
-        Arrays.sort(intArrayInicial);
+        Arrays.sort(initialArrOfIntegers);
         System.out.printf("%nA ordem dos elementos do array após o método sort():%n intArray: ");
 
-        for (int inteiro : intArrayInicial)
+        for (int integerValue : initialArrOfIntegers)
         {
-            System.out.printf("%d ", inteiro);
-        };//fim da sentença de iteração for aprimorado
+            System.out.printf("%d ", integerValue);
+        };//end of iteration sentence (for)
 
         //Preenchendo um array de 10 elementos com o número 7.
         //O método fill() preenche todas as posições de um array com o valor especificado
-        System.out.print("\n");
-        System.out.printf("\nMétodo fill() para preenchimento de um array com elementos%n");
+        System.out.println();
+        System.out.printf("%nMétodo fill() para preenchimento de um array com elementos%n");
 
-        System.out.printf("Inicializando um array de inteiros com 10 posições. Todas recebem o valor padrão de inicialização de inteiros, i.e, 0.%n");
+        System.out.printf("%s", "Inicializando um array de inteiros com 10 posições. Todas recebem o valor padrão de inicialização de inteiros, i.e, 0.%n");
 
         int[] fillArray = new int[10];
         displayArray(fillArray, "Valores iniciais das posições do array fillArray: ");
