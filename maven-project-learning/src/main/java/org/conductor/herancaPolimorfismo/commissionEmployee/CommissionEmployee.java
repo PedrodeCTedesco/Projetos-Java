@@ -3,6 +3,7 @@
  * @author pedro de castro tedesco
  * @link "Java: how to program" (Deitel & Deitel), cap. 9
  * @since 03/02/2024
+ * @see "src/tesjava/org.conductor.herancaEpolimorfismo.commissionEmployeeBasePlus to Junit 5 tests
  * */
 
 package org.conductor.herancaPolimorfismo.commissionEmployee;
@@ -14,11 +15,18 @@ public class CommissionEmployee extends Object
     //Fields
     private final String firstName;
     private final String lastName;
-    private final String socialSecurityNumber;
+
+    //wil lbe protected so subclasses can access this field without invoking query methods
+    protected final String socialSecurityNumber;
     private double grossSales; //total sales per week
     private double commissionRate; //commission's percentage
 
     //Constructor
+
+    public CommissionEmployee() {
+        this(null, null, null, 0.0, 0.0);
+    };
+
     public CommissionEmployee(String firstName, String lastName, String socialSecurityNumber, double grossSales, double commissionRate)
     {
         //The call of super() for Object occurs here implicitly
@@ -73,7 +81,7 @@ public class CommissionEmployee extends Object
     public void setCommissionRate(double commissionRate)
     {
         if(commissionRate <= 0.0 || commissionRate >= 1.0)
-            throw new IllegalArgumentException("Comission rate must be > 0.0 and < 1.0");
+            throw new IllegalArgumentException("Commission rate must be > 0.0 and < 1.0");
 
         this.commissionRate = commissionRate;
     }
@@ -83,14 +91,16 @@ public class CommissionEmployee extends Object
     //Return earnings
     public double earnings()
     {
-        return commissionRate * grossSales;
+        return getCommissionRate() * getGrossSales();
     }
 
     @Override //indicates that this method overrides the superclass method
     public String toString()
     {
-        return String.format("%s: %s %s%n%s: %s%n%s: %.2f%n%s: %.2f", "commission employee", getFirstName(), getLastName(),
-                "social security number", getSocialSecurityNumber(), "gross sales", getGrossSales(), "commission rate", getCommissionRate());
+        return String.format("%s: %s %s%n%s: %s%n%s: %.2f%n%s: %.2f",
+                "commission employee", getFirstName(), getLastName(),
+                "social security number", getSocialSecurityNumber(), "gross sales", getGrossSales(),
+                "commission rate", getCommissionRate());
     }
 
 };//end of CommissionEmployee class

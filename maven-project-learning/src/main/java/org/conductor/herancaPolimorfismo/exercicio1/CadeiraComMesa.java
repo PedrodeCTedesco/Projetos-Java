@@ -16,7 +16,7 @@ public class CadeiraComMesa extends Cadeira
     //constructor
     public CadeiraComMesa (Cor color, double width, double depth)
     {
-        super();
+        super(color);
         this.width = width;
         this.depth = depth;
         this.color = color;

@@ -14,7 +14,7 @@ public class CadeiraComRodinhas extends Cadeira
 
     public CadeiraComRodinhas (Cor color, Data lastMaintenanceDate)
     {
-        super();
+        super(color);
         this.color = color;
         this.lastMaintenanceDate = lastMaintenanceDate;
     };//Fim do construtor
