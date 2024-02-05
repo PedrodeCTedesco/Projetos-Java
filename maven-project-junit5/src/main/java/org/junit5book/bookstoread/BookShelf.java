@@ -6,13 +6,18 @@
 
 package org.junit5book.bookstoread;
 
+import java.time.Year;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class BookShelf
 {
     //Fields
     private final List<Book> books = new ArrayList<>();
+    private int booksRead;
 
     //Client methods
     public List<Book> books()
@@ -35,4 +40,26 @@ public class BookShelf
         return books.stream().sorted(criteria).collect(Collectors.toList());
     };//end of arrange(Comparator<Book> criteria);
 
+    public Map<Year, List<Book>> groupByPublicationYear()
+    {
+        return groupBy(book -> Year.of(book.getPublishedOn().getYear()));
+    };// end of groupByPublicationYear();
+
+    public <K> Map <K, List<Book>> groupBy(Function<Book, K> fx)
+    {
+        return books
+                .stream()
+                .collect(groupingBy(fx));
+    };//end of groupBy(Function<Book, K> fx);
+
+    public Progress progress()
+    {
+        int booksRead = Long.valueOf(books.stream().filter(Book::isRead).count()).
+                intValue();
+
+        int booksToRead = books.size() - booksRead;
+        int percentageCompleted = booksRead * 100 / books.size();
+        int percentageToRead = booksToRead * 100 / books.size();
+        return new Progress(percentageCompleted, percentageToRead, 0);
+    };//end of progress();
 };//end of BookShelf class

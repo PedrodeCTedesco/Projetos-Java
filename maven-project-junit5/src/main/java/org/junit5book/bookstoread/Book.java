@@ -15,6 +15,9 @@ public class Book implements Comparable<Book>
     private final String title;
     private final String author;
     private final LocalDate publishedOn;
+    private LocalDate startedReadingOn;
+    private LocalDate finishedReadingOn;
+    //private LocalDate finishedReadingOn;
 
     //Constructor
     public Book(String title, String author, LocalDate publishedOn)
@@ -22,6 +25,8 @@ public class Book implements Comparable<Book>
         this.title = title;
         this.author = author;
         this.publishedOn = publishedOn;
+        this.startedReadingOn = null;
+        this.finishedReadingOn = null;
     };//end of three args constructor
 
     //Query methods
@@ -52,5 +57,14 @@ public class Book implements Comparable<Book>
     {
         return this.title.compareTo(that.title);
     }
+
+    public void startedReadingOn(LocalDate startedOn) {
+        this.startedReadingOn = startedOn; }
+
+    public void finishedReadingOn(LocalDate finishedOn) {
+        this.finishedReadingOn = finishedOn; }
+
+    public boolean isRead() { return startedReadingOn != null &&
+            finishedReadingOn != null; }
 
 };//end of Book class
