@@ -6,7 +6,7 @@
  * @see "src/tesjava/org.conductor.herancaEpolimorfismo.commissionEmployeeBasePlus to Junit 5 tests
  * */
 
-package org.conductor.herancaPolimorfismo.commissionEmployee;
+package org.conductor.heranca.commissionEmployee;
 
 //Note that 'extends Object' its here for educational proposes only.
 //Everytime that we create a class and doesn't specify its superclass Object becomes the superclass implicit

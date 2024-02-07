@@ -5,7 +5,7 @@
  * @since 19/10/2023
  */
 
-package org.conductor.herancaPolimorfismo.exercicio1;
+package org.conductor.heranca.exercicio1;
 
 public class Cadeira
 {

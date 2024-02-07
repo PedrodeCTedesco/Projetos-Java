@@ -7,9 +7,9 @@
  * automated JUnit 5 tests
  * */
 
-package org.conductor.herancaPolimorfismo.commissionEmployeeBasePlusHeritage;
+package org.conductor.heranca.commissionEmployee.commissionEmployeeBasePlusHeritage;
 
-import org.conductor.herancaPolimorfismo.commissionEmployee.CommissionEmployee;
+import org.conductor.heranca.commissionEmployee.CommissionEmployee;
 
 public class BasePlusEmployeeWithHeritage extends CommissionEmployee
 {

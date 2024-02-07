@@ -1,4 +1,4 @@
-package org.conductor.herancaPolimorfismo.exercicio2;
+package org.conductor.heranca.exercicio2;
 
 public class Rectangle extends Figure
 {

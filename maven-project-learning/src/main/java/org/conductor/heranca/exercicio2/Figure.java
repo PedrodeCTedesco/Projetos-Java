@@ -3,7 +3,7 @@
  * @since 22/10/2023
  */
 
-package org.conductor.herancaPolimorfismo.exercicio2;
+package org.conductor.heranca.exercicio2;
 
 public class Figure
 {

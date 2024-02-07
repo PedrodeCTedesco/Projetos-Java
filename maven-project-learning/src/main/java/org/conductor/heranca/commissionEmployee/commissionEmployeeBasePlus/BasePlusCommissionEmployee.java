@@ -7,7 +7,7 @@
  * @see "src/tesjava/org.conductor.herancaEpolimorfismo.commissionEmployeeBasePlus to Junit 5 tests
  * t*/
 
-package org.conductor.herancaPolimorfismo.commissionEmployeeBasePlus;
+package org.conductor.heranca.commissionEmployee.commissionEmployeeBasePlus;
 
 public class BasePlusCommissionEmployee
 {

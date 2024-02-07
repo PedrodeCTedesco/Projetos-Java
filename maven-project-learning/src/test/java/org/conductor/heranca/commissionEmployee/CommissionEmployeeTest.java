@@ -3,7 +3,7 @@
  * @see "Java: how to program" (Deitel & Deitel, cap. 9)
  * */
 
-package org.conductor.herancaPolimorfismo.commissionEmployee;
+package org.conductor.heranca.commissionEmployee;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
