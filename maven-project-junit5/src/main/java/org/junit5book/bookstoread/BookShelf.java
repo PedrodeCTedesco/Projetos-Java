@@ -6,12 +6,16 @@
 
 package org.junit5book.bookstoread;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 public class BookShelf
 {
@@ -37,7 +41,7 @@ public class BookShelf
 
     public List<Book> arrange(Comparator<Book> criteria)
     {
-        return books.stream().sorted(criteria).collect(Collectors.toList());
+        return books.stream().sorted(criteria).collect(toList());
     };//end of arrange(Comparator<Book> criteria);
 
     public Map<Year, List<Book>> groupByPublicationYear()
@@ -54,12 +58,30 @@ public class BookShelf
 
     public Progress progress()
     {
+        //Number of total books read (absolut)
         int booksRead = Long.valueOf(books.stream().filter(Book::isRead).count()).
                 intValue();
+        //Number of total books in progress (absolut)
+        int booksInProgress = Long.valueOf(books.stream().filter(Book::isProgress).count()).
+                intValue();
 
-        int booksToRead = books.size() - booksRead;
+        //booksToRead it's the total os books minus the read books
+        int booksToRead = books.size() - booksRead - booksInProgress;
         int percentageCompleted = booksRead * 100 / books.size();
         int percentageToRead = booksToRead * 100 / books.size();
-        return new Progress(percentageCompleted, percentageToRead, 0);
+        int percentageInProgress = booksInProgress * 100 / books.size();
+
+        return new Progress(percentageCompleted, percentageToRead, percentageInProgress);
     };//end of progress();
+
+    public List<Book> findBooksByTitle(String title) {
+        return findBooksByTitle(title, b -> true);
+    };//end of findBooksByTitle(String title);
+
+    public List<Book> findBooksByTitle(String title, Predicate<Book> filter) {
+        return books.stream()
+                .filter(b -> b.getTitle().toLowerCase().contains(title))
+                .filter(filter)
+                .collect(toList());
+    };//end of findBooksByTitle(String title, Predicate<Book> filter);
 };//end of BookShelf class

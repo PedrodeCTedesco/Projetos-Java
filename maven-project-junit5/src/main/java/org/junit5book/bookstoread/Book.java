@@ -17,7 +17,7 @@ public class Book implements Comparable<Book>
     private final LocalDate publishedOn;
     private LocalDate startedReadingOn;
     private LocalDate finishedReadingOn;
-    //private LocalDate finishedReadingOn;
+    private LocalDate readingInProgress;
 
     //Constructor
     public Book(String title, String author, LocalDate publishedOn)
@@ -27,6 +27,7 @@ public class Book implements Comparable<Book>
         this.publishedOn = publishedOn;
         this.startedReadingOn = null;
         this.finishedReadingOn = null;
+        this.readingInProgress = null;
     };//end of three args constructor
 
     //Query methods
@@ -45,6 +46,21 @@ public class Book implements Comparable<Book>
         return publishedOn;
     };//end of getPublishedOn();
 
+    public LocalDate getStartedReadingOn()
+    {
+        return startedReadingOn;
+    }
+
+    public LocalDate getFinishedReadingOn()
+    {
+        return  finishedReadingOn;
+    }
+
+    public LocalDate getReadingInProgress()
+    {
+        return readingInProgress;
+    }
+
     @Override
     public String toString()
     {
@@ -58,13 +74,31 @@ public class Book implements Comparable<Book>
         return this.title.compareTo(that.title);
     }
 
-    public void startedReadingOn(LocalDate startedOn) {
-        this.startedReadingOn = startedOn; }
+    public void startedReadingOn(LocalDate startedOn)
+    {
+        this.startedReadingOn = startedOn;
+        this.readingInProgress = startedOn;
+    }
 
     public void finishedReadingOn(LocalDate finishedOn) {
         this.finishedReadingOn = finishedOn; }
 
-    public boolean isRead() { return startedReadingOn != null &&
-            finishedReadingOn != null; }
+    //public void startedDate(LocalDate startedAt)
+    //{
+       // this.readingInProgress = startedAt;
+    //}
+
+    public boolean isProgress()
+    {
+        return readingInProgress != null && finishedReadingOn == null;
+    }
+
+    public boolean isRead()
+    {
+        return startedReadingOn != null && finishedReadingOn != null;
+    }
+
+    //Query Methods
+
 
 };//end of Book class

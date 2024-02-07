@@ -8,6 +8,7 @@
 package bookstoread;
 
 //JUnit 5
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -21,6 +22,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 //Project imports
 import org.junit5book.bookstoread.Book;
 import org.junit5book.bookstoread.BookShelf;
+import org.junit5book.bookstoread.Progress;
 
 //API Java
 import java.lang.reflect.Parameter;
@@ -104,7 +106,7 @@ public class BookShelfSpec
                 fail(()->"Should not be able to add book to books");
             } catch (Exception e)
             {
-                assertTrue(e instanceof UnsupportedOperationException, ()->"Should throw UnssuportedOperationException");
+                assertInstanceOf(UnsupportedOperationException.class, e, () -> "Should throw UnssuportedOperationException");
             };//end of exception treatment
         };//booksReturnedFromBookShelfIsImmutableForClient();
     };//end of BooksAreAdded inner static class
@@ -195,6 +197,34 @@ public class BookShelfSpec
 
     };//end of UserProvidedCriteria inner static class
 
+    @Nested
+    @DisplayName("search")
+    class BookShelfSearchSpec
+    {
+        @BeforeEach
+        void setup()
+        {
+            shelf.add(codeComplete, effectiveJava, mythicalManMonth, cleanCode);
+        };//end of setup()
+
+        @Test
+        @DisplayName("should find books with title containing text")
+        void shouldFindBooksWithTitleContainingText()
+        {
+            List<Book> books = shelf.findBooksByTitle("code");
+            assertThat(books.size()).isEqualTo(2);
+        };//end of shouldFindBooksWithTitleContainingText();
+
+        @Test
+        @DisplayName("should find boks with title containing text and published after specified date")
+        void shouldFilterSearchedBooksBasedOnPublishedDate()
+        {
+            List<Book> books = shelf.findBooksByTitle("code", b ->
+                    b.getPublishedOn().isBefore(LocalDate.of(2014, 12, 31)));
+            assertThat(books.size()).isEqualTo(2);
+        };//end of shouldFilterSearchedBooksBasedOnPublishedDate()
+
+    };//end of BookShelfSearchSpec class
 };//end of BookShelfSpec class
 
 class BooksParameterResolver implements ParameterResolver
@@ -229,7 +259,6 @@ class BooksParameterResolver implements ParameterResolver
         books.put("Refactoring: Improving the Design of Existing Code",
                 new Book("Refactoring: Improving the Design of Existing Code", "Martin Fowler",
                         LocalDate.of(2002, Month.MARCH, 9)));
-
         return books;
     };//end of resolveParameter(...);
 };//end of BooksParameterResolver inner static class
