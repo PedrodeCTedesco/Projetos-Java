@@ -78,10 +78,10 @@ public class BookShelf
         return findBooksByTitle(title, b -> true);
     };//end of findBooksByTitle(String title);
 
-    public List<Book> findBooksByTitle(String title, Predicate<Book> filter) {
+    public List<Book> findBooksByTitle(String title, BookFilter filter) {
         return books.stream()
                 .filter(b -> b.getTitle().toLowerCase().contains(title))
-                .filter(filter)
+                .filter(b -> filter.apply(b))
                 .collect(toList());
     };//end of findBooksByTitle(String title, Predicate<Book> filter);
 };//end of BookShelf class
