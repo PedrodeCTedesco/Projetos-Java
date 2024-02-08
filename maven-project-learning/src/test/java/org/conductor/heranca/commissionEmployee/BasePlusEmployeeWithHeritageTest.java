@@ -2,9 +2,9 @@
  * @since 04/02/2024
  * */
 
-package org.conductor.heranca.commissionEmployeeBasePlusHeritage;
+package org.conductor.heranca.commissionEmployee;
 
-import org.conductor.heranca.commissionEmployee.commissionEmployeeBasePlusHeritage.BasePlusEmployeeWithHeritage;
+import org.conductor.heranca.commissionEmployee.BasePlusEmployeeWithHeritage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

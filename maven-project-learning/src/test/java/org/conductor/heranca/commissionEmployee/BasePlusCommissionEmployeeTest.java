@@ -4,9 +4,9 @@
  * @see "Java: how to program" (Deitel and Deitel, 10ªed, chapter 9)
  * */
 
-package org.conductor.heranca.commissionEmployeeBasePlus;
+package org.conductor.heranca.commissionEmployee;
 
-import org.conductor.heranca.commissionEmployee.commissionEmployeeBasePlus.BasePlusCommissionEmployee;
+import org.conductor.heranca.commissionEmployee.BasePlusCommissionEmployee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

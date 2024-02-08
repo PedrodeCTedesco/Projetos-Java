@@ -7,7 +7,7 @@
  * automated JUnit 5 tests
  * */
 
-package org.conductor.heranca.commissionEmployee.commissionEmployeeBasePlusHeritage;
+package org.conductor.heranca.commissionEmployee;
 
 import org.conductor.heranca.commissionEmployee.CommissionEmployee;
 
