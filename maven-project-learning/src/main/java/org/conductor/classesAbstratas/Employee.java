@@ -17,6 +17,18 @@ public abstract class Employee
     //Constructor
     public Employee(String firstName, String lastName, String socialSecurityNumber)
     {
+        //check the value of firstName, lastName and SSN
+        if(firstName.equalsIgnoreCase(""))
+            throw new IllegalArgumentException("First name cannot be empty");
+
+        //check the value of firstName
+        if(lastName.equalsIgnoreCase(""))
+            throw new IllegalArgumentException("Last name cannot be empty");
+
+        //check the value of firstName
+        if(socialSecurityNumber.equalsIgnoreCase(""))
+            throw new IllegalArgumentException("Social security number cannot be empty");
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.socialSecurityNumber = socialSecurityNumber;
