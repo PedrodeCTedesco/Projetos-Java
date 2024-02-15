@@ -40,6 +40,13 @@ public class SalariedEmployee extends Employee
     };//end of setWeeklySalary(double weeklySalary);
 
     //Class methods
+    //Here we substituted the earnings() method of Employee for paymentAmount() of the interface.
+    @Override
+    public double paymentAmount()
+    {
+        return getWeeklySalary();
+    };//end of paymentAmount();
+
     @Override
     public double earnings()
     {

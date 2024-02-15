@@ -66,6 +66,12 @@ public class CommissionEmployee extends Employee
     };//end of earnings (abstract method)
 
     @Override
+    public double paymentAmount()
+    {
+        return earnings();
+    };//end of paymentAmount();
+
+    @Override
     public String toString()
     {
         return String.format("%s: %s%n%s: $%,.2f; %s: $%.2f",

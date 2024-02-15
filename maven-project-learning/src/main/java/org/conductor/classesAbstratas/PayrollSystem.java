@@ -7,6 +7,9 @@
 
 package org.conductor.classesAbstratas;
 
+import org.conductor.interfaces.Invoices;
+import org.conductor.interfaces.Payable;
+
 public class PayrollSystem
 {
     public static void main (String[]args)
@@ -55,6 +58,23 @@ public class PayrollSystem
         //Get the name and type of currentEmployee
         for(int i = 0; i < employees.length; i+=1)
             System.out.printf("Employee %d is a %s%n", i, employees[i].getClass().getName());
+
+        //Demonstrating the polymorphism of the payable interface and its inheritance effects on employee
+        Payable[] payableObjects = new Payable[4];
+
+        payableObjects[0] = new Invoices("01234", "seat", 2, 375.000);
+        payableObjects[1] = new Invoices("56789", "tire", 4, 79.95);
+        payableObjects[2] = new SalariedEmployee("John", "Smith", "111-11-1111",
+                800.000);
+        payableObjects[3] = new SalariedEmployee("Lisa", "Barnes", "222-22-2222",
+                1200.00);
+
+        System.out.println("Invoices and Employees processed polymorphically:");
+
+        for (Payable currentPayable : payableObjects)
+        {
+            System.out.printf("%n%s %n%s: $%,.2f%n", currentPayable, "payment due", currentPayable.paymentAmount());
+        }
 
     };//end of main method
 };//end of PayrollSystem

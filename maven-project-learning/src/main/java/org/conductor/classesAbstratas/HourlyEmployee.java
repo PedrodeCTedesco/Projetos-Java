@@ -65,6 +65,12 @@ public class HourlyEmployee extends Employee
     };//end of earnings();
 
     @Override
+    public double paymentAmount()
+    {
+        return earnings();
+    };//end of paymentAmount();
+
+    @Override
     public String toString()
     {
         return String.format("hourly employee: %s%n%s: $%,.2f; %s: $%,.2f",

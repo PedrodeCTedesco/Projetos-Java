@@ -6,7 +6,9 @@
 
 package org.conductor.classesAbstratas;
 
-public abstract class Employee
+import org.conductor.interfaces.Payable;
+
+public abstract class Employee implements Payable
 {
     //Fields
     //We use this fields to manipulate the subclasses correspondent fields

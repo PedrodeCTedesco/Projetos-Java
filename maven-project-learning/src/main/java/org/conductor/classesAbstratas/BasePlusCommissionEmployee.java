@@ -51,6 +51,12 @@ public class BasePlusCommissionEmployee extends CommissionEmployee
     };//end of earnings();
 
     @Override
+    public double paymentAmount()
+    {
+        return getBaseSalary() * super.earnings();
+    }
+
+    @Override
     public String toString()
     {
         return String.format("%s %s; %s: $%,.2f",
