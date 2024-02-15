@@ -9,10 +9,7 @@ package bookstoread;
 
 //JUnit 5
 import org.assertj.core.api.AssertionsForClassTypes;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,15 +23,18 @@ import org.junit5book.bookstoread.Progress;
 
 //API Java
 import java.lang.reflect.Parameter;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 @DisplayName("<= BookShelfSpec =>")
 @ExtendWith(BooksParameterResolver.class)
+@ExtendWith(LoggingTestExecutionExceptionHandler.class)
 public class BookShelfSpec
 {
     //Fields
@@ -225,6 +225,51 @@ public class BookShelfSpec
         };//end of shouldFilterSearchedBooksBasedOnPublishedDate()
 
     };//end of BookShelfSearchSpec class
+
+    @Nested
+    @DisplayName("Nested class test to use assertTimeout methods")
+    class AssertTimeoutMethods
+    {
+        //The test in this class are running in the same thread.
+        //That means that in test_should_complete_in_one_second() and test_that_return_a_value()
+        // if Thread.sleep(2000) the test will fail 2 seconds after we run it (first mentioned test).
+        @Test
+        void test_should_complete_in_one_second()
+        {
+            //We can manipulate this test success by sleep() argument value.
+            // If this overload version of assertTimeout() we use and Executable as second argument.
+            assertTimeout(Duration.of(1, ChronoUnit.SECONDS), ()-> Thread.sleep(800));
+        };//end of test_should_complete_in_one_second();
+
+        @Test
+        void test_that_return_a_value()
+        {
+            String message = assertTimeout(Duration.of(1, ChronoUnit.SECONDS),
+                    ()-> "Returned value");
+            assertEquals("Returned value", message);
+        };//end of test_that_return_a_value();
+
+        @Test
+        void usingAssertTimeoutPreemptively()
+        {
+            //Here we made the test run less than 2 seconds because it runs in different threads
+            assertTimeoutPreemptively(Duration.of(1, ChronoUnit.SECONDS),
+                    ()-> Thread.sleep(900));
+        };//end of usingAssertTimeoutPreemptively();
+
+    };//end of AssertTimeoutMethods class
+
+    /** With this annotation we can repeat the test a specific number of times.
+     * We can customize the name of the test case with placeholders, like:
+     *
+     * @RepeatedTest(value = 10, name = "the_test_{currentRepetition}/{totalRepetitions}")
+     * void test() {...}
+     * */
+    @RepeatedTest(3)
+    void this_is_a_repeated_test()
+    {
+        assertTrue(true);
+    }
 };//end of BookShelfSpec class
 
 class BooksParameterResolver implements ParameterResolver
@@ -262,3 +307,4 @@ class BooksParameterResolver implements ParameterResolver
         return books;
     };//end of resolveParameter(...);
 };//end of BooksParameterResolver inner static class
+
