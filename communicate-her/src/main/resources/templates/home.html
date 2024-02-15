@@ -1,0 +1,18 @@
+<!-- This is the template of the application. Every template must be on the templates' folder.
+ The images will be placed in the static folder. In the <img> we are using a tymeleaf attribute
+ and a relative path to the image. For example, the real image must be at:
+ src/main/resources/static/Her.svg -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hermanas Comunicação - Serviços</title>
+</head>
+<body>
+    <h1>Bem-vinda a nossa página de serviços!</h1>
+    <!--<p>Saiba como nós podemos empoderar a sua empresa através da comunicação</p>-->
+    <img th:src="@{/images/Her.svg}"/>
+</body>
+</html>
