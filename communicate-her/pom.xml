@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-<!-- check this latter. Uncomment to see the problem with project tag
+
     <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter</artifactId>
+        <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.2</version>
     </parent>
--->
+
     <groupId>hercommunication</groupId>
     <artifactId>communicate-her</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -22,22 +22,27 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     </properties>
-<!--
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot</artifactId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.2.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
--->
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
-        there is one vulnerability:Provides transitive vulnerable dependency maven:com.jayway.jsonpath:json-path:2.8.0
-CVE-2023-51074 5.3 Out-of-bounds Write vulnerability with Medium severity found -->
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -58,7 +63,6 @@ CVE-2023-51074 5.3 Out-of-bounds Write vulnerability with Medium severity found 
             <artifactId>thymeleaf-spring6</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
@@ -96,13 +100,22 @@ CVE-2023-51074 5.3 Out-of-bounds Write vulnerability with Medium severity found 
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+
         <!-- Junit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.1</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+
         <!-- AssertJ -->
         <dependency>
             <groupId>org.assertj</groupId>

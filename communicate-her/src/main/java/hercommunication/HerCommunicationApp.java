@@ -9,11 +9,24 @@ package hercommunication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/** The @SpringBootApplication is a composite annotation that combines three in one.
+ * 1) @SpringBootConfiguration --> designates this class as a configuration class.
+ * 2) @EnableAutoConfiguration --> enables Spring Boot automatically configuration. This annotation tells
+ * Spring Boot automatically configure any components that it thinks you'll need.
+ * 3) @ComponentScan --> enables component scanning. This lets you declare other classes with annotations
+ * like @Component, @Controller and @Service to have Spring automatically discover and register them as components
+ * int the Spring application context.
+ * */
+
 @SpringBootApplication
 public class HerCommunicationApp
 {
     public static void main(String[] args)
     {
+        /** The run() method of the SpringApplication class performs the actual bootstrapping of the
+         * application creating the Spring application context. The two parameters passed are the
+         * configuration class and the command-line arguments.
+         * */
         SpringApplication.run(HerCommunicationApp.class, args);
     };//end of main()
 };//end of HerCommunicationApp

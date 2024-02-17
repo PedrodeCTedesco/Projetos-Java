@@ -1,4 +1,7 @@
-/** This is the controller class to handle requests to the browser.
+/** This is the controller class to handle requests to the browser. The controller class handles
+ * requests and responds with information of some sort. The controller is a concept
+ * at the center of the Spring MVC.
+ *
  * @author pedro de castro tedesco
  * @since 15/02/2024
  * @see Spring and SpringBoot in Action (Craig Walls, 2021)
@@ -19,10 +22,9 @@ public class HomePageController
     {
         return "home"; //returns the view name
     };//end of home()
-
-    /** The template name is derived from the logical view name created with home() by prefixing it
-     * with "/templates" and postfix it with ".html". So the result is: templates/home.html. To create
-     * the template we will use Thymeleaf.
-     * Now we should add this template in src/main/resources/templates/home.html.
-     * */
 };//end of HomePageController
+/** The template name is derived from the logical view name created with home() by prefixing it
+ * with "/templates" and postfix it with ".html". So the result is: templates/home.html.
+ * To create the template we will use Thymeleaf.
+ * Now we should add this template in src/main/resources/templates/home.html.
+ * */
