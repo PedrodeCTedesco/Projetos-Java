@@ -22,6 +22,37 @@ public class ClientRequestedServices
     private final String clientBusinessArea; //business area of the client's company
     private List<Services> services = new ArrayList<>(); //the number of services requested;
 
+    //Constructor
+    public ClientRequestedServices(String clientName, String clientCompanyName, String clientPhone,
+                                   String clientCity, String clientBusinessArea, List<Services> services)
+    {
+        //Check arg values
+        if (clientName == null || clientName.isEmpty())
+            throw new IllegalArgumentException("Client name cannot be empty or null");
+
+        if (clientCompanyName == null || clientCompanyName.isEmpty())
+            throw new IllegalArgumentException("Client company name cannot be empty or null");
+
+        if (clientPhone == null || clientPhone.isEmpty())
+            throw new IllegalArgumentException("Client phone cannot be empty or null");
+
+        if (clientCity == null || clientCity.isEmpty())
+            throw new IllegalArgumentException("Client city cannot be empty or null");
+
+        if (clientBusinessArea == null || clientBusinessArea.isEmpty())
+            throw new IllegalArgumentException("Client business area cannot be empty or null");
+
+        if (services == null || services.isEmpty())
+            throw new IllegalArgumentException("You must order at least one service");
+
+        this.clientName = clientName;
+        this.clientCompanyName = clientCompanyName;
+        this.clientPhone = clientPhone;
+        this.clientCity = clientCity;
+        this.clientBusinessArea = clientBusinessArea;
+        this.services = services;
+    };//end of 6 arg constructor
+
     //Client methods
     public void addService(Services service)
     {

@@ -38,7 +38,8 @@ public class CommunicationServicesSpec
         {
             String invalidName = "";
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
-                    ()-> {new CommunicationServices(invalidName, "ID", CommunicationServices.Type.MKTDIGITAL);},
+                    ()-> {new CommunicationServices(invalidName, roteiros.getId(),
+                            CommunicationServices.Type.MKTDIGITAL);},
                     "Should throw IllegalArgumentException because name value is empty");
             assertEquals("Name cannot be null or empty", t.getMessage());
         };//end of nameValueCannotBeEmpty();
@@ -49,7 +50,8 @@ public class CommunicationServicesSpec
         {
             String invalidName = null;
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
-                    ()-> {new CommunicationServices(invalidName, "ID", CommunicationServices.Type.MKTDIGITAL);},
+                    ()-> {new CommunicationServices(invalidName, marketingInfluencia.getId(),
+                            CommunicationServices.Type.MKTDIGITAL);},
                     "Should throw IllegalArgumentException because name value is null");
             assertEquals("Name cannot be null or empty", t.getMessage());
         };//end of nameValueCannotBeEmpty();
