@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 //Lombok
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
+@Component
 @Data //using Lombok library to make the code simple
 public class CommunicationServices
 {
@@ -36,7 +38,7 @@ public class CommunicationServices
         this.type = type;
     };//end of 3 arg constructor
 
-    public CommunicationServices(){};//end of no-args constructor
+    public CommunicationServices() {};//end of no-args constructor
 
     //Enum type
     public enum Type

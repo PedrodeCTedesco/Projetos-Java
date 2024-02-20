@@ -10,9 +10,11 @@
 package hercommunication;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller //that annotation aloud the Spring component scanning to discover it and creates an instance
+@ControllerAdvice
 //of HomePageController as a bean
 public class HomePageController
 {

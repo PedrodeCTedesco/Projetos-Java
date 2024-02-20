@@ -7,6 +7,8 @@
 
 package templatesTest;
 //Project imports
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import hercommunication.HomePageController;
 
 //JUnit 5
@@ -28,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(HomePageController.class) //WebTest for HomePageController
 public class HomePageControllerTest
 {
-
     //Fields
     @Autowired
     private MockMvc mockMvc; //injects MockMvc object to mock the request
@@ -52,4 +53,12 @@ public class HomePageControllerTest
                 .andExpect(content().contentType(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8"))
                 .andExpect(xpath("//img").exists());
     };//end of confirmThatExistsAnImageTagInTheHomePage() throws Exception
+
+    @Test
+    public void testHomePage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("home")); // Check if it returns the correct view name
+    }
+
 };//end of HomePageControllerSpec

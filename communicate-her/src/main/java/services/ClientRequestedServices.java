@@ -15,16 +15,16 @@ import java.util.List;
 public class ClientRequestedServices
 {
     //Fields
-    private final String clientName; //name of the client
-    private final String clientCompanyName; // company's name
-    private final String clientPhone; //number of contact
-    private final String clientCity; //city of residence;
-    private final String clientBusinessArea; //business area of the client's company
+    private String clientName; //name of the client
+    private String clientCompanyName; // company's name
+    private String clientPhone; //number of contact
+    private String clientCity; //city of residence;
+    private String clientBusinessArea; //business area of the client's company
     private List<Services> services = new ArrayList<>(); //the number of services requested;
 
     //Constructor
-    public ClientRequestedServices(String clientName, String clientCompanyName, String clientPhone,
-                                   String clientCity, String clientBusinessArea, List<Services> services)
+    public ClientRequestedServices(final String clientName, final String clientCompanyName, final String clientPhone,
+                                   final String clientCity, final String clientBusinessArea, final List<Services> services)
     {
         //Check arg values
         if (clientName == null || clientName.isEmpty())
@@ -52,6 +52,8 @@ public class ClientRequestedServices
         this.clientBusinessArea = clientBusinessArea;
         this.services = services;
     };//end of 6 arg constructor
+
+    public ClientRequestedServices(){};
 
     //Client methods
     public void addService(Services service)

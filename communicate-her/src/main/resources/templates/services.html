@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Hermanas - Serviços</title>
-    <!-- Na versão Ultimate <link rel="stylesheet" th:href="@{/template-styles/services.css}"> -->
 </head>
 <body style=" background-image: url(../static/images/her-logo.jpg);
               background-position: center 30%;
@@ -15,41 +14,44 @@
               grid-template: 50% 50% / 100%;
               place-items: center;">
 
-    <hgroup style="block-size: 100%;
+<hgroup style="block-size: 100%;
                    display: grid;
                    grid-area: 1 / 1 / 2 / 2;
                    grid-template: 100% / 100%;
                    inline-size: 100%;
                    max-inline-size: 100%;">
-        <h1 style="block-size: inherit;
+    <h1 style="block-size: inherit;
                    grid-area: 1 / 1 / 2 / 2;
                    inline-size: inherit;
                    max-inline-size: inherit;
                    text-align: center;">Como podemos te ajudar?</h1>
-    </hgroup>
+</hgroup>
 
-    <section style="display: grid;
-                    grid-area: 2 / 1/ 3/ 2;
-                    grid-template: 100% / 100%;
-                    place-items: center;">
-        <form method="POST" th:object="${serviceOrder}" style="block-size: 100%;
-                                                               display: grid;
-                                                               grid-template: 100% / 100%;
-                                                               inline-size: 100%;
-                                                               max-inline-size: 100%;
-                                                               place-items: center;">
+<section style="display: grid;
+                grid-area: 2 / 1/ 3/ 2;
+                grid-template: 100% / 100%;
+                place-items: center;">
+    <form method="POST" th:object="${servicesRequested}" style="block-size: 100%;
+                                                           display: grid;
+                                                           grid-template: 100% / 100%;
+                                                           inline-size: 100%;
+                                                           max-inline-size: 100%;
+                                                           place-items: center;">
+        <div>
             <div>
-                <div id="MKTDIGITAL">
-                    <h2 style="">Escolha o seu serviço para marketing digital:</h2>
-                    <div th:each="communicationService : ${service}">
-                        <input th:field="*{communicationServices}" type="checkbox"
-                               th:value="${communicationService.id}"/>
-                        <span th:text="${communicationService.name}">COMMUNICATIONSERVICES</span>
-                    </div>
+                <h2 style="">Escolha o seu serviço para marketing digital:</h2>
+                <div th:each="service : ${servicesOffered}">
+                    <label for="serviceName"
+                           th:for="${service.id}" th:text="${service.name}"></label>
+                    <input id="serviceName" type="checkbox"
+                           th:id="${service.id}"
+                           th:name="${service.id}"
+                           th:field="*{service}" th:value="${service.id}"/>
                 </div>
             </div>
-        </form>
-    </section>
+        </div>
+    </form>
+</section>
 
 </body>
 </html>

@@ -6,100 +6,70 @@
 
 package services.web;
 
-//Project imports
-
-//Lombok
-import lombok.extern.slf4j.Slf4j;
 //Spring framework
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.ui.Model;
-
-import services.CommunicationServices;
-import services.CommunicationServices.Type;
-import services.Services;
+import org.springframework.web.bind.annotation.*;
 import services.ClientRequestedServices;
+import services.CommunicationServices;
+import services.Services;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-@Slf4j
 @Controller
-@RequestMapping("/service")
-@SessionAttributes("serviceOrder")
+@ControllerAdvice
+@SessionAttributes("servicesRequested")
+@Slf4j
+@RequestMapping("/services") //All HTTP GET method wil lbe handle by this class
 public class ServicesController
 {
-    @ModelAttribute //this method is used to render a list of services for digital marketing (hard-coded;
-    //this could be in a database). The method will be rendered when a GET request came
-    public void addServicesToModel (Model model)
+    //Handle the HTTP GET request
+    @GetMapping//for specific use (get some specific resource inside the template). Now there is none.
+    public String showServicePage()
     {
-        List<CommunicationServices> communicationServicesList = Arrays.asList(
-            new CommunicationServices("Planejamento estratégico", "PLANEST",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Marketing de conteúdo", "MKTCONT",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Marketing de influência", "MKTINFLU",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Gestão de redes sociais", "REDES",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Tráfego pago", "TRAF",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Naming", "NAMIG",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Branding", "BRD",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Sites", "STE",
-                    CommunicationServices.Type.SITE),
-            new CommunicationServices("Roteiros", "RTO",
-                    CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Tradução inglês/português", "TRAD",
-                        CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Produção gráfica, eletrônica e executiva",
-                    "PRODGRAF", CommunicationServices.Type.MKTDIGITAL),
-            new CommunicationServices("Edição de vídeo", "EDVIDEO",
-                    CommunicationServices.Type.MKTDIGITAL)
-        );
+        return "services";
+    };//end of showServicePage();
 
-        Type[] types = CommunicationServices.Type.values(); //get the values of CommunicationServices.Type
-
-        //Add the services to the Model object that wil lbe passed to showServicesForm()
-        for (Type type : types)
-        {
-            model.addAttribute(type.toString().toLowerCase(),
-                    filterByType(communicationServicesList, type));
-        };//end of enhanced for
-    }//end of addServicesToModel(Model model)
-
-    @ModelAttribute(name = "serviceOrder") //the same value of @SessionAttributes
-    public CommunicationServices communicationServices()
+    //Model section
+    @ModelAttribute(value = "servicesRequestedByClient")
+    public ClientRequestedServices servicesRequestedByClient()
     {
-        return new CommunicationServices();
-    };//end of communicationServices();
+        return new ClientRequestedServices();
+    };
 
-    @ModelAttribute(name = "services") //the object will be placed into the model object
-    public Services services()
+    /** When the controller class is invoked, Spring MVC will call addServicesToModel(Model)
+     * to populate model with attributes related to services offered (the instances of CommunicationServices).
+     * These attributes will be stored under the name 'servicesOffered'. So we can access this values
+     * in a Thymeleaf template using the key: servicesOffered.
+     * If no value provided the name of the class is used by default.
+     * */
+    @ModelAttribute(value = "servicesOffered")
+    public void addServicesToModel(Model model)
+    {
+        //Create two services
+        CommunicationServices strategicPlanning = new CommunicationServices(
+                "Planejamento estratégico",
+                "S-PE",
+                CommunicationServices.Type.MKTDIGITAL);
+
+        CommunicationServices sites = new CommunicationServices(
+                "Sites",
+                "S-S",
+                CommunicationServices.Type.SITE);
+
+        //Add attributes to model object
+        model.addAttribute("S-PE", strategicPlanning);
+        model.addAttribute("S-S", sites);
+    };//end of addServicesToModel(Model model);
+
+    @ModelAttribute(value = "services")
+    public Services createServiceInstance()
     {
         return new Services();
-    };//end of services();
+    };
 
-    @GetMapping //Used with @RequestMapping to invoke showServicesForm() when a GET request came for "/service".
-    public String showServicesForm()
+    @ModelAttribute(value = "communicationServices")
+    public CommunicationServices createCommunicationServicesInstance()
     {
-        return "service";
-    };//end of showServicesForm();
-
-    //Implementation methods
-    //The filterByType() is a helper method
-    private Iterable<CommunicationServices> filterByType(
-            List<CommunicationServices> communicationServices, Type type)
-    {
-        return communicationServices
-                .stream()
-                .filter(x -> x.getType().equals(type))
-                .collect(Collectors.toList());
-    };//end of filterByType(...)
+        return new CommunicationServices();
+    };
 };//end of ServicesController
