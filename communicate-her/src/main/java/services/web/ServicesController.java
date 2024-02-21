@@ -6,11 +6,17 @@
 
 package services.web;
 
-//Spring framework
+//Lombok
 import lombok.extern.slf4j.Slf4j;
+//Spring framework
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//Project imports
 import services.ClientRequestedServices;
 import services.CommunicationServices;
 import services.Services;
@@ -19,13 +25,20 @@ import services.Services;
 @ControllerAdvice
 @SessionAttributes("servicesRequested")
 @Slf4j
-@RequestMapping("/services") //All HTTP GET method wil lbe handle by this class
+//@RequestMapping("/services")
 public class ServicesController
 {
+    //Fields
+    private static final Logger logger = LoggerFactory.getLogger(ServicesController.class);
+
+
     //Handle the HTTP GET request
-    @GetMapping//for specific use (get some specific resource inside the template). Now there is none.
+    @GetMapping("/services")
     public String showServicePage()
     {
+        logger.info("Acessando o endpoint /services");
+        logger.debug("Acessando o endpoint /services");
+        logger.error("Acessando o endpoint /services");
         return "services";
     };//end of showServicePage();
 
@@ -61,7 +74,7 @@ public class ServicesController
         model.addAttribute("S-S", sites);
     };//end of addServicesToModel(Model model);
 
-    @ModelAttribute(value = "services")
+    @ModelAttribute(value = "servicesClass")
     public Services createServiceInstance()
     {
         return new Services();

@@ -4,10 +4,11 @@
  * @see Spring and SpringBoot in Action (Craig Walls, 2021)
  * */
 
+import hercommunicationConfiguration.HerCommunicationApp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = HerCommunicationApp.class)
 public class HerCommunicationAppTest
 {
     @Test

@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Hermanas - Serviços</title>
 </head>
 <body style=" background-image: url(../static/images/her-logo.jpg);
@@ -26,32 +26,6 @@
                    max-inline-size: inherit;
                    text-align: center;">Como podemos te ajudar?</h1>
 </hgroup>
-
-<section style="display: grid;
-                grid-area: 2 / 1/ 3/ 2;
-                grid-template: 100% / 100%;
-                place-items: center;">
-    <form method="POST" th:object="${servicesRequested}" style="block-size: 100%;
-                                                           display: grid;
-                                                           grid-template: 100% / 100%;
-                                                           inline-size: 100%;
-                                                           max-inline-size: 100%;
-                                                           place-items: center;">
-        <div>
-            <div>
-                <h2 style="">Escolha o seu serviço para marketing digital:</h2>
-                <div th:each="service : ${servicesOffered}">
-                    <label for="serviceName"
-                           th:for="${service.id}" th:text="${service.name}"></label>
-                    <input id="serviceName" type="checkbox"
-                           th:id="${service.id}"
-                           th:name="${service.id}"
-                           th:field="*{service}" th:value="${service.id}"/>
-                </div>
-            </div>
-        </div>
-    </form>
-</section>
 
 </body>
 </html>

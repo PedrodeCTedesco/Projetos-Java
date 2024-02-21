@@ -7,7 +7,7 @@
  * @see Spring and SpringBoot in Action (Craig Walls, 2021)
  * */
 
-package hercommunication;
+package hercommunicationConfiguration;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;

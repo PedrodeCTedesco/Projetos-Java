@@ -4,10 +4,17 @@
  * @see Spring and SpringBoot in Action (Craig Walls, 2021)
  * */
 
-package hercommunication;
+package hercommunicationConfiguration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /** The @SpringBootApplication is a composite annotation that combines three in one.
  * 1) @SpringBootConfiguration --> designates this class as a configuration class.
@@ -21,6 +28,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HerCommunicationApp
 {
+    //Fields
+    @Autowired
+    private ApplicationContext applicationContext;
+
+
+
     public static void main(String[] args)
     {
         /** The run() method of the SpringApplication class performs the actual bootstrapping of the

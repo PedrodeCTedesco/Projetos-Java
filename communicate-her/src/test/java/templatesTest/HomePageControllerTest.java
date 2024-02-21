@@ -9,7 +9,7 @@ package templatesTest;
 //Project imports
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import hercommunication.HomePageController;
+import hercommunicationConfiguration.HomePageController;
 
 //JUnit 5
 import org.junit.jupiter.api.DisplayName;
