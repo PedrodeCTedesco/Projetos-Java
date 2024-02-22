@@ -24,6 +24,17 @@
     </properties>
 
     <build>
+        <!-- mirror target to project structure -->
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+        <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <!-- Plugins -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
-import services.CommunicationServices;
+import com.hermanas.landingPage.services.CommunicationServices;
 
 import java.lang.reflect.Parameter;
 import java.util.*;
@@ -101,7 +101,7 @@ class CommunicationServicesParameterResolver implements ParameterResolver
     {
         Parameter parameter = parameterContext.getParameter();
         return Objects.equals(parameter.getParameterizedType().getTypeName(),
-                "java.util.Map<java.lang.String, services.CommunicationServices>");
+                "java.util.Map<java.lang.String, com.hermanas.landingPage.services.CommunicationServices>");
     };//end of supportsParameter(...);
 
     @Override

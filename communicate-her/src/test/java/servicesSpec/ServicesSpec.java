@@ -6,8 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
-import services.CommunicationServices;
-import services.Services;
+import com.hermanas.landingPage.services.CommunicationServices;
+import com.hermanas.landingPage.services.Services;
 
 //API Java
 import java.lang.reflect.Parameter;
@@ -173,7 +173,7 @@ class ServicesParameterResolver implements ParameterResolver
     {
         Parameter parameter = parameterContext.getParameter();
         return Objects.equals(parameter.getParameterizedType().getTypeName(),
-                "java.util.Map<java.lang.String, services.Services>");
+                "java.util.Map<java.lang.String, com.hermanas.landingPage.services.Services>");
     };//end of supportsParameter(...);
 
     @Override

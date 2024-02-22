@@ -7,9 +7,10 @@
 
 package templatesTest;
 //Project imports
+import com.hermanas.landingPage.homepage.controller.HomePageController;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import hercommunicationConfiguration.HomePageController;
+
 
 //JUnit 5
 import org.junit.jupiter.api.DisplayName;

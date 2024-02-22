@@ -8,9 +8,9 @@ import org.junit.jupiter.api.extension.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Package imports
-import services.ClientRequestedServices;
-import services.CommunicationServices;
-import services.Services;
+import com.hermanas.landingPage.services.ClientRequestedServices;
+import com.hermanas.landingPage.services.CommunicationServices;
+import com.hermanas.landingPage.services.Services;
 //API Java
 import java.lang.reflect.Parameter;
 import java.time.LocalDate;
@@ -228,7 +228,7 @@ class ClientRequestedServicesParameterResolver implements ParameterResolver
     {
         Parameter parameter = parameterContext.getParameter();
         return Objects.equals(parameter.getParameterizedType().getTypeName(),
-                "java.util.Map<java.lang.String, services.ClientRequestedServices>");
+                "java.util.Map<java.lang.String, com.hermanas.landingPage.services.ClientRequestedServices>");
     };//end of supportsParameter(...);
 
 

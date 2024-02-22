@@ -1,5 +1,6 @@
 package templatesTest;
 //JUnit 5
+import com.hermanas.landingPage.services.controller.ServicesController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.ui.Model;
 //Project
-import services.ClientRequestedServices;
-import services.CommunicationServices;
-import services.Services;
-import services.web.ServicesController;
+import com.hermanas.landingPage.services.ClientRequestedServices;
+import com.hermanas.landingPage.services.CommunicationServices;
+import com.hermanas.landingPage.services.Services;
+
 //API Java
 //AssertJ
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,7 +65,7 @@ public class ServicesControllerTest
         void showServicePageMustReturnServiceLogicalName()
         {
             when(servicesControllerMock.showServicePage())
-                    .thenReturn("services");
+                    .thenReturn("/services");
         };//showServicePageMustReturnServiceLogicalName();
 
         @Test
