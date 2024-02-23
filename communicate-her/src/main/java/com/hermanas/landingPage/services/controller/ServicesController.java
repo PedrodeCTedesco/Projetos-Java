@@ -29,7 +29,7 @@ import com.hermanas.landingPage.services.Services;
 public class ServicesController
 {
     //Fields
-    private static final Logger logger = LoggerFactory.getLogger(ServicesController.class);
+    //private static final Logger logger = LoggerFactory.getLogger(ServicesController.class);
 
 
     //Handle the HTTP GET request

@@ -1,3 +1,4 @@
+//package com.hermanas.landingPage.config.thymeleaf;
 package com.hermanas.thymeleafConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
