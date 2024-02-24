@@ -21,6 +21,11 @@ import com.hermanas.landingPage.services.ClientRequestedServices;
 import com.hermanas.landingPage.services.CommunicationServices;
 import com.hermanas.landingPage.services.Services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @ControllerAdvice
 @SessionAttributes("servicesRequested")
@@ -55,6 +60,9 @@ public class ServicesController
     @ModelAttribute(value = "servicesOffered")
     public void addServicesToModel(Model model)
     {
+        //Create a Map
+        Map<String, CommunicationServices> map = new HashMap<>();
+
         //Create two services
         CommunicationServices strategicPlanning = new CommunicationServices(
                 "Planejamento estratégico",
@@ -66,9 +74,10 @@ public class ServicesController
                 "S-S",
                 CommunicationServices.Type.SITE);
 
-        //Add attributes to model object
-        model.addAttribute("S-PE", strategicPlanning);
-        model.addAttribute("S-S", sites);
+        map.put("strategic planning", strategicPlanning);
+        map.put("sites", sites);
+
+        model.addAttribute("servicesOffered", map);
     };//end of addServicesToModel(Model model);
 
     @ModelAttribute(value = "servicesClass")

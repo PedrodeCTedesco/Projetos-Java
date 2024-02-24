@@ -32,7 +32,7 @@ public class ThymeleafConfig implements WebMvcConfigurer
 
         templateResolver.setTemplateMode(TemplateMode.HTML);
 
-        templateResolver.setCacheable(true);
+        templateResolver.setCacheable(false);
         return templateResolver;
     }
 

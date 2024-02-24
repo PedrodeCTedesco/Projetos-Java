@@ -14,20 +14,50 @@
               grid-template: 50% 50% / 100%;
               place-items: center;">
 
-<hgroup style="block-size: 100%;
+    <hgroup style="block-size: 100%;
                    display: grid;
                    grid-area: 1 / 1 / 2 / 2;
                    grid-template: 100% / 100%;
                    inline-size: 100%;
                    max-inline-size: 100%;">
-    <h1 style="block-size: inherit;
+        <h1 style="block-size: inherit;
                    grid-area: 1 / 1 / 2 / 2;
                    inline-size: inherit;
                    max-inline-size: inherit;
                    text-align: center;">Como podemos te ajudar?</h1>
+    </hgroup>
 
-    <p th:text="#{servicesOffered.name}"></p>
-</hgroup>
+    <form method="post">
+        <div style=""> <!-- o container geral da seção para estilizar -->
+            <div style="display: grid;
+                        grid-template: 30% 30% 30% / 100%;
+                        place-items: center;"> <!-- será o container de cada serviço-->
+                <h3 style="display: grid;
+                           grid-area: 1 / 1 / 2 / 2;">Qual serviço você deseja?</h3>
+                    <div style="display: grid;
+                                grid-area: 2 / 1 / 3 / 2;
+                                grid-template: 60% / 90% 10%;">
+                        <label for="serviceType" style="grid-area: 1 / 1 / 2 / 2;"
+                               th:text="${servicesOffered['strategic planning'].name}"></label>
+                        <input id="serviceType" type="checkbox" style="grid-area: 1 / 2 / 2 / 3;"
+                               th:text="${servicesOffered['strategic planning'].name}"/>
+                    </div>
+
+                    <div style="display: grid;
+                                grid-area: 3 / 1 / 4 / 2;
+                                grid-template: 60% / 60% 35%;">
+                        <label for="serviceType2" style="grid-area: 1 / 1 / 2 / 2;"
+                               th:text="${servicesOffered['sites'].name}"></label>
+                        <input id="serviceType2" type="checkbox" style="grid-area: 1 / 2 / 2 / 3;"
+                               th:text="${servicesOffered['sites'].name}"/>
+                    </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
 
 </body>
 </html>
