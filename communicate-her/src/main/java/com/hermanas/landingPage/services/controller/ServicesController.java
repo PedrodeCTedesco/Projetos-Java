@@ -63,32 +63,45 @@ public class ServicesController
         //Create a Map
         Map<String, CommunicationServices> map = new HashMap<>();
 
-        //Create two services
+        //Create fixed services
         CommunicationServices strategicPlanning = new CommunicationServices(
                 "Planejamento estratégico",
                 "S-PE",
-                CommunicationServices.Type.MKTDIGITAL);
+                CommunicationServices.Type.FIXED);
 
+        CommunicationServices contentManagement = new CommunicationServices(
+                "Gestão de conteúdo",
+                "S-GR",
+                CommunicationServices.Type.FIXED);
+
+        CommunicationServices paidTraffic = new CommunicationServices(
+                "Tráfego pago",
+                "S-TP",
+                CommunicationServices.Type.FIXED);
+
+        //Create variable services
         CommunicationServices sites = new CommunicationServices(
                 "Sites",
                 "S-S",
-                CommunicationServices.Type.SITE);
+                CommunicationServices.Type.VARIABLE);
+
+        CommunicationServices personalMarketing = new CommunicationServices(
+                "Marketing de influência",
+                "S-MKTINF",
+                CommunicationServices.Type.VARIABLE);
+
+        CommunicationServices video = new CommunicationServices(
+                "Edição de vídeo",
+                "S-EDVIDEO",
+                CommunicationServices.Type.VARIABLE);
 
         map.put("strategic planning", strategicPlanning);
+        map.put("content management", contentManagement);
+        map.put("paid traffic", paidTraffic);
         map.put("sites", sites);
+        map.put("personal marketing", personalMarketing);
+        map.put("video", video);
 
         model.addAttribute("servicesOffered", map);
     };//end of addServicesToModel(Model model);
-
-    @ModelAttribute(value = "servicesClass")
-    public Services createServiceInstance()
-    {
-        return new Services();
-    };
-
-    @ModelAttribute(value = "communicationServices")
-    public CommunicationServices createCommunicationServicesInstance()
-    {
-        return new CommunicationServices();
-    };
 };//end of ServicesController

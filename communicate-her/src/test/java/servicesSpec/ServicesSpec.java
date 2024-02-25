@@ -184,13 +184,13 @@ class ServicesParameterResolver implements ParameterResolver
         Map<String, Services> servicesOffered = new HashMap<>();
         //The objects of CommunicationServices
         CommunicationServices strategicPlanning = new CommunicationServices("Planejamento estratégico",
-                "PLANEST", CommunicationServices.Type.MKTDIGITAL);
+                "PLANEST", CommunicationServices.Type.FIXED);
 
         CommunicationServices marketingContent = new CommunicationServices("Marketing de conteúdo",
-                "MKTCONT", CommunicationServices.Type.MKTDIGITAL);
+                "MKTCONT", CommunicationServices.Type.FIXED);
 
         CommunicationServices site = new CommunicationServices("Sites", "STE",
-                CommunicationServices.Type.SITE);
+                CommunicationServices.Type.FIXED);
         //The property for Services list of communication services
         List<CommunicationServices> servicesRequested = Arrays.asList(strategicPlanning, marketingContent, site);
 

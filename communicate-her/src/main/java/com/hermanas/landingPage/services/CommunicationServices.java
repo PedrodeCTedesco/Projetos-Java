@@ -43,9 +43,7 @@ public class CommunicationServices
     //Enum type
     public enum Type
     {
-        //Sempre ao seu lado (nome da categoria dos serviços fixos - plan estr, gestao de conteudo, traf)
-        //Sempre que precisar (nome da categoria de serviços variáveis - ed video, sites, mkt influencia)
-        MKTDIGITAL, SITE;
+        FIXED, VARIABLE;
     };//end of enum Type
 
     //Implementation methods

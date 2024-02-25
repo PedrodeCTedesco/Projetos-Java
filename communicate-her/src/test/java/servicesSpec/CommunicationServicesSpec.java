@@ -39,7 +39,7 @@ public class CommunicationServicesSpec
             String invalidName = "";
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
                     ()-> {new CommunicationServices(invalidName, roteiros.getId(),
-                            CommunicationServices.Type.MKTDIGITAL);},
+                            CommunicationServices.Type.FIXED);},
                     "Should throw IllegalArgumentException because name value is empty");
             assertEquals("Name cannot be null or empty", t.getMessage());
         };//end of nameValueCannotBeEmpty();
@@ -51,7 +51,7 @@ public class CommunicationServicesSpec
             String invalidName = null;
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
                     ()-> {new CommunicationServices(invalidName, marketingInfluencia.getId(),
-                            CommunicationServices.Type.MKTDIGITAL);},
+                            CommunicationServices.Type.FIXED);},
                     "Should throw IllegalArgumentException because name value is null");
             assertEquals("Name cannot be null or empty", t.getMessage());
         };//end of nameValueCannotBeEmpty();
@@ -63,7 +63,7 @@ public class CommunicationServicesSpec
             String invalidId = "";
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
                     ()-> {new CommunicationServices("someName", invalidId,
-                            CommunicationServices.Type.MKTDIGITAL);},
+                            CommunicationServices.Type.FIXED);},
                     "Should throw IllegalArgumentException because Id value is empty");
             assertEquals("Id cannot be null of empty", t.getMessage());
         };//end of iDValueCannotBeEmpty();
@@ -75,7 +75,7 @@ public class CommunicationServicesSpec
             String invalidId = null;
             IllegalArgumentException t = assertThrows(IllegalArgumentException.class,
                     ()-> {new CommunicationServices("someName", invalidId,
-                            CommunicationServices.Type.MKTDIGITAL);},
+                            CommunicationServices.Type.FIXED);},
                     "Should throw IllegalArgumentException because Id value is empty");
             assertEquals("Id cannot be null of empty", t.getMessage());
         };//end of iDValueCannotBeNull();
@@ -113,10 +113,10 @@ class CommunicationServicesParameterResolver implements ParameterResolver
 
         //Create data test
         communicationServicesTestData.put("Roteiros", new CommunicationServices("Roteiros", "RTN",
-                CommunicationServices.Type.MKTDIGITAL));
+                CommunicationServices.Type.FIXED));
         communicationServicesTestData.put("Marketing de influência",
                 new CommunicationServices("Marketing de influência", "MKTINFLUENCIA",
-                        CommunicationServices.Type.MKTDIGITAL));
+                        CommunicationServices.Type.FIXED));
 
         return communicationServicesTestData;
     };//end of resolveParameter(...);

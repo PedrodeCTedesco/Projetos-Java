@@ -241,7 +241,7 @@ class ClientRequestedServicesParameterResolver implements ParameterResolver
 
         //CommunicationServices objects
         CommunicationServices communicationServices = new CommunicationServices("Roteiros",
-                "RTN", CommunicationServices.Type.MKTDIGITAL);
+                "RTN", CommunicationServices.Type.FIXED);
 
         List<Services> servicesList = getServices(communicationServices);
 
@@ -256,7 +256,7 @@ class ClientRequestedServicesParameterResolver implements ParameterResolver
     private static List<Services> getServices(CommunicationServices communicationServices)
     {
         CommunicationServices communicationServices1 = new CommunicationServices("Marketing de influência",
-                "MKTINFLUENCIA", CommunicationServices.Type.MKTDIGITAL);
+                "MKTINFLUENCIA", CommunicationServices.Type.FIXED);
 
         //List of CommunicationServices
         List<CommunicationServices> communicationServicesList = Arrays.asList(communicationServices, communicationServices1);

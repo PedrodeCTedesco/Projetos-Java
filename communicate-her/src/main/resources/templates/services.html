@@ -5,59 +5,71 @@
     <meta charset="UTF-8"/>
     <title>Hermanas - Serviços</title>
 </head>
-<body style=" background-image: url(../static/images/her-logo.jpg);
-              background-position: center 30%;
-              background-repeat: no-repeat;
-              background-size: cover;
-              block-size: auto;
-              display: grid;
-              grid-template: 50% 50% / 100%;
-              place-items: center;">
+    <body>
+        <hgroup style="display: grid; grid-template: 100% / 100%; place-items: center;">
+            <h1>Como podemos ajudar?</h1>
+        </hgroup>
 
-    <hgroup style="block-size: 100%;
-                   display: grid;
-                   grid-area: 1 / 1 / 2 / 2;
-                   grid-template: 100% / 100%;
-                   inline-size: 100%;
-                   max-inline-size: 100%;">
-        <h1 style="block-size: inherit;
-                   grid-area: 1 / 1 / 2 / 2;
-                   inline-size: inherit;
-                   max-inline-size: inherit;
-                   text-align: center;">Como podemos te ajudar?</h1>
-    </hgroup>
+        <form method="post" style="display: grid; grid-template: 100% / 100%; place-items:center;">
+            <div> <!-- o container geral da seção para estilizar -->
+                <hgroup> <!-- chamada 'sempre ao seu lado'-->
+                    <h3>Sempre ao seu lado</h3>
+                    <p>Atividades que o seu negócio precisa para estar sempre ativo!</p>
+                </hgroup>
 
-    <form method="post">
-        <div style=""> <!-- o container geral da seção para estilizar -->
-            <div style="display: grid;
-                        grid-template: 30% 30% 30% / 100%;
-                        place-items: center;"> <!-- será o container de cada serviço-->
-                <h3 style="display: grid;
-                           grid-area: 1 / 1 / 2 / 2;">Qual serviço você deseja?</h3>
-                    <div style="display: grid;
-                                grid-area: 2 / 1 / 3 / 2;
-                                grid-template: 60% / 90% 10%;">
-                        <label for="serviceType" style="grid-area: 1 / 1 / 2 / 2;"
-                               th:text="${servicesOffered['strategic planning'].name}"></label>
-                        <input id="serviceType" type="checkbox" style="grid-area: 1 / 2 / 2 / 3;"
-                               th:text="${servicesOffered['strategic planning'].name}"/>
+                <section> <!-- bloco dos serviços sempre ao seu lado -->
+                    <div>
+                        <label for="service_strategicPlanning"
+                           th:text="${servicesOffered['strategic planning'].name}"></label>
+                        <input id="service_strategicPlanning" name="service_strategicPlanning"
+                           type="checkbox"/>
                     </div>
 
-                    <div style="display: grid;
-                                grid-area: 3 / 1 / 4 / 2;
-                                grid-template: 60% / 60% 35%;">
-                        <label for="serviceType2" style="grid-area: 1 / 1 / 2 / 2;"
-                               th:text="${servicesOffered['sites'].name}"></label>
-                        <input id="serviceType2" type="checkbox" style="grid-area: 1 / 2 / 2 / 3;"
-                               th:text="${servicesOffered['sites'].name}"/>
+                    <div>
+                        <label for="service_contentManagement"
+                               th:text="${servicesOffered['content management'].name}"></label>
+                        <input id="service_contentManagement" name="service_contentManagement"
+                               type="checkbox"/>
                     </div>
+
+                    <div>
+                        <label for="service_paidTraffic"
+                               th:text="${servicesOffered['paid traffic'].name}"></label>
+                        <input id="service_paidTraffic" name="service_paidTraffic"
+                               type="checkbox"/>
+                    </div>
+                </section>
+
+                <hgroup> <!-- chamada 'sempre ao seu lado'-->
+                    <h3>Sempre que precisar</h3>
+                    <p>Atividades que quando seu negócio pedir nós te oferecemos!</p>
+                </hgroup>
+
+                <section> <!--bloco dos serviços quando precisar -->
+                    <div>
+                        <label for="service_sites"
+                           th:text="${servicesOffered['sites'].name}"></label>
+                        <input id="service_sites" name="service_sites"
+                           type="checkbox"/>
+                    </div>
+
+                    <div>
+                        <label for="service_personalMarketing"
+                               th:text="${servicesOffered['personal marketing'].name}"></label>
+                        <input id="service_personalMarketing" name="service_personalMarketing"
+                               type="checkbox"/>
+                    </div>
+
+                    <div>
+                        <label for="service_video"
+                               th:text="${servicesOffered['video'].name}"></label>
+                        <input id="service_video" name="service_video"
+                               type="checkbox"/>
+                    </div>
+                </section>
+
+                <button type="submit">Enviar</button>
             </div>
-        </div>
-    </form>
-
-
-
-
-
-</body>
+        </form>
+    </body>
 </html>

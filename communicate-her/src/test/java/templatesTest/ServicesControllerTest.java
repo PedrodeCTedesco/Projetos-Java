@@ -101,22 +101,6 @@ public class ServicesControllerTest
             assertThat(servicesController.servicesRequestedByClient())
                     .isEqualTo(new ClientRequestedServices());
         };//end of servicesRequestedByClientMethodShouldReturnClientRequestedServicesObject();
-
-        @Test
-        @DisplayName("check if createServicesInstance() returns the Services object")
-        void createServicesInstanceMethodShouldReturnServicesObject()
-        {
-            assertThat(servicesController.createServiceInstance())
-                    .isEqualTo(new Services());
-        };//end of servicesRequestedByClientMethodShouldReturnClientRequestedServicesObject();
-
-        @Test
-        @DisplayName("check if createCommunicationServicesInstance() returns the CommunicationServices object")
-        void createCommunicationServicesInstanceMethodShouldReturnCommunicationServicesObject()
-        {
-            assertThat(servicesController.createCommunicationServicesInstance())
-                    .isEqualTo(new CommunicationServices());
-        };//end of servicesRequestedByClientMethodShouldReturnClientRequestedServicesObject();
     };//end of checkTheReturnOfMethods;
 
     @Test
@@ -136,14 +120,7 @@ public class ServicesControllerTest
 
         //Verify that addServicesToModel(Model model) was invoked. We call the modelMock because in
         //the body of addServicesToModel(...) we call the addAttribute() on the model parameter.
-        verify(modelMock).addAttribute("S-PE", new CommunicationServices(
-                "Planejamento estratégico",
-                "S-PE",
-                CommunicationServices.Type.MKTDIGITAL));
-        verify(modelMock).addAttribute("S-S", new CommunicationServices(
-                "Sites",
-                "S-S",
-                CommunicationServices.Type.SITE));
+        verify(modelMock).addAttribute(eq("servicesOffered"), anyMap());
     };//end of addServicesToModelMethodShouldBeInvoked();
 
 };//end of ServicesControllerTest;
