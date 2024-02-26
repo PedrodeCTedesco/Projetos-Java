@@ -12,16 +12,18 @@ package com.hermanas.landingPage.homepage.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller //that annotation aloud the Spring component scanning to discover it and creates an instance
+@Controller
 @ControllerAdvice
+@RequestMapping("/")
 //of HomePageController as a bean
 public class HomePageController
 {
-    @GetMapping("/") //handles requests for the root path (/). If an HTTP GET request is received
-    //for the root path then this method (home()) should handle that request.
+    //Handles HTTP GET to "/"
+    @GetMapping
     public String home()
     {
-        return "home"; //returns the view name
+        return "home";
     };//end of home()
 };//end of HomePageController
