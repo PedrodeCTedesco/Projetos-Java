@@ -11,37 +11,43 @@ import org.taco.tacos.Ingredients;
 import org.taco.tacos.Taco;
 import org.taco.tacos.TacoOrder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/design")
+@RequestMapping("design")
 @SessionAttributes("tacoOrder")
 @Slf4j
 public class DesignTacoController
 {
-    @ModelAttribute
+    @ModelAttribute(value= "tacoIngredients")
     public void addIngredientsToModel(Model model)
     {
-        List<Ingredients> ingredients = Arrays.asList(
-                new Ingredients("FLTO", "Flour Tortilla", Ingredients.Type.WRAP),
-                new Ingredients("COTO", "Corn Tortilla", Ingredients.Type.WRAP),
-                new Ingredients("GRBF", "Ground Beff", Ingredients.Type.PROTEIN),
-                new Ingredients("CARN", "Carnitas", Ingredients.Type.PROTEIN),
-                new Ingredients("TMTO", "Diced Tomatoes", Ingredients.Type.VEGGIES),
-                new Ingredients("LETC", "Lettuce", Ingredients.Type.VEGGIES),
-                new Ingredients("CHED", "Cheddar", Ingredients.Type.CHEESE),
-                new Ingredients("JACK", "Monterrey Jack", Ingredients.Type.CHEESE),
-                new Ingredients("SLSA", "Salsa", Ingredients.Type.SAUCE),
-                new Ingredients("SRCR", "Sour Cream", Ingredients.Type.SAUCE));
+        Map<String, Ingredients> map = new HashMap<>();
 
-        Ingredients.Type[] types = Ingredients.Type.values();
-        for (Ingredients.Type type : types)
-        {
-            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
-        }
+        Ingredients flourTortilla = new Ingredients("FLTO", "Flour Tortilla", Ingredients.Type.WRAP);
+        Ingredients cornTortilla = new Ingredients("COTO", "Corn Tortilla", Ingredients.Type.WRAP);
+        Ingredients groundBeff = new Ingredients("GRBF", "Ground Beff", Ingredients.Type.PROTEIN);
+        Ingredients carnitas = new Ingredients("CARN", "Carnitas", Ingredients.Type.PROTEIN);
+        Ingredients dicedTomatoes = new Ingredients("TMTO", "Diced Tomatoes", Ingredients.Type.VEGGIES);
+        Ingredients lettuce = new Ingredients("LETC", "Lettuce", Ingredients.Type.VEGGIES);
+        Ingredients cheddar = new Ingredients("CHED", "Cheddar", Ingredients.Type.CHEESE);
+        Ingredients monterreyJack = new Ingredients("JACK", "Monterrey Jack", Ingredients.Type.CHEESE);
+        Ingredients salsa = new Ingredients("SLSA", "Salsa", Ingredients.Type.SAUCE);
+        Ingredients sourCream = new Ingredients("SRCR", "Sour Cream", Ingredients.Type.SAUCE);
+
+        map.put("flour tortilla", flourTortilla);
+        map.put("corn tortilla", cornTortilla);
+        map.put("ground beff", groundBeff);
+        map.put("carnitas", carnitas);
+        map.put("diced tomatoes", dicedTomatoes);
+        map.put("lettuce", lettuce);
+        map.put("cheddar", cheddar);
+        map.put("monterrey jack", monterreyJack);
+        map.put("salsa", salsa);
+        map.put("sour cream", sourCream);
+
+        model.addAttribute("tacoIngredients", map);
     };//addIngredientsToModel(Model model)
 
     @ModelAttribute(name = "tacoOrder")
@@ -60,13 +66,5 @@ public class DesignTacoController
     public String showDesignForm()
     {
         return "design";
-    }
-
-    private Iterable<Ingredients> filterByType(List<Ingredients> ingredients, Ingredients.Type type)
-    {
-        return ingredients
-                .stream()
-                .filter(x -> x.getType().equals(type))
-                .collect(Collectors.toList());
-    }
+    };//end of showDesignForm();
 };//end of DesignTacoController
