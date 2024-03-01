@@ -45,7 +45,7 @@ public class ServicesController
     };//end of showServicePage();
 
     //Model section
-    @ModelAttribute(value = "servicesRequestedByClient")
+    @ModelAttribute(name = "servicesRequestedByClient")
     public ClientRequestedServices servicesRequestedByClient()
     {
         return new ClientRequestedServices();
@@ -104,4 +104,11 @@ public class ServicesController
 
         model.addAttribute("servicesOffered", map);
     };//end of addServicesToModel(Model model);
+
+    //Handles POST requests
+    @PostMapping
+    public String handlesFormService(ClientRequestedServices clientRequestedServices)
+    {
+        return "";
+    }
 };//end of ServicesController
