@@ -3,10 +3,7 @@ package org.taco.tacos.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.taco.tacos.Ingredients;
 import org.taco.tacos.Taco;
 import org.taco.tacos.TacoOrder;
@@ -20,6 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class DesignTacoController
 {
+    //Model attributes
     @ModelAttribute(value= "tacoIngredients")
     public void addIngredientsToModel(Model model)
     {
@@ -62,9 +60,20 @@ public class DesignTacoController
         return new Taco();
     }
 
+    //GET Handler
     @GetMapping
     public String showDesignForm()
     {
         return "design";
     };//end of showDesignForm();
+
+    //POST Handler
+    @PostMapping
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder)
+    {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+
+        return "redirect:/orders/current";
+    };//end of processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder)
 };//end of DesignTacoController
