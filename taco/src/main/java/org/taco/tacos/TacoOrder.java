@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 public class TacoOrder
 {
+    //Fields
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;
@@ -18,7 +19,6 @@ public class TacoOrder
     private String ccNumber;
     private String ccExpiration;
     private String ccCVV;
-
     private List<Taco> tacos = new ArrayList<>();
 
     //Client methods

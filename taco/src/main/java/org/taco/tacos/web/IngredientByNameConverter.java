@@ -18,7 +18,7 @@ import java.util.Map;
 public class IngredientByNameConverter implements Converter<String, Ingredients>
 {
     //Fields
-    private Map<String, Ingredients> ingredientsMap = new HashMap<>();
+    private final Map<String, Ingredients> ingredientsMap = new HashMap<>();
 
     //Constructor
     public IngredientByNameConverter()

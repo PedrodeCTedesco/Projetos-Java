@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class DesignTacoController
 {
     //Model attributes
-    @ModelAttribute(value= "tacoIngredients")
+    @ModelAttribute(name = "tacoIngredients")
     public void addIngredientsToModel(Model model)
     {
         Map<String, Ingredients> map = new HashMap<>();
