@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("/orders")
-@SessionAttributes("tacoOrder")
+@SessionAttributes({"tacoOrder", "tacoIngredients"})
 @Slf4j
 public class OrderController
 {
