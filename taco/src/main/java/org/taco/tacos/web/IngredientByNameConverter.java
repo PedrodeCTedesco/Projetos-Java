@@ -7,7 +7,9 @@
 
 package org.taco.tacos.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.taco.tacos.Ingredients;
 
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class IngredientByNameConverter implements Converter<String, Ingredients>
 {
     //Fields
@@ -36,11 +39,11 @@ public class IngredientByNameConverter implements Converter<String, Ingredients>
                 new Ingredients("JACK", "Monterrey Jack", Ingredients.Type.CHEESE));
         ingredientsMap.put("Salsa", new Ingredients("SLSA", "Salsa", Ingredients.Type.SAUCE));
         ingredientsMap.put("Sour Cream", new Ingredients("SRCR", "Sour Cream", Ingredients.Type.SAUCE));
-    }
+    };//end of constructor
 
     @Override
-    public Ingredients convert (String name)
+    public Ingredients convert (@NonNull String n)
     {
-        return ingredientsMap.get(name);
-    }
+        return ingredientsMap.get(n);
+    };//end of convert(...)
 };//end of IngredientByNameConverter implements Converter<String, Ingredients>
