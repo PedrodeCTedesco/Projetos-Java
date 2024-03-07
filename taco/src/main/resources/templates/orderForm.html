@@ -19,10 +19,10 @@
 
         <div th:each="taco : ${tacoOrder.tacos}">
             <p th:text="${taco.name}"></p>
-
-            <p th:text="${taco.ingredientList}"></p>
+            <ul>
+                <li th:each="ingredient : ${taco.ingredientList}" th:text="${ingredient.name}"></li>
+            </ul>
         </div>
-
     </form>
 </body>
 </html>
