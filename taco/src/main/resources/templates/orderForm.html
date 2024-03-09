@@ -18,11 +18,52 @@
         <a th:href="@{/design}" id="another">Design another taco</a><br/>
 
         <div th:each="taco : ${tacoOrder.tacos}">
+            <h4>Check your order:</h4>
             <p th:text="${taco.name}"></p>
             <ul>
                 <li th:each="ingredient : ${taco.ingredientList}" th:text="${ingredient.name}"></li>
             </ul>
         </div>
+
+        <div>
+            <h3>Deliver my taco to...</h3>
+            <label for="deliveryName">Name:
+                <input type="text" id="deliveryName" name="deliveryName"/>
+            </label>
+
+            <label for="deliveryStreet">Endereço:
+                <input type="text" id="deliveryStreet" name="deliveryStreet"/>
+            </label>
+
+            <label for="deliveryCity">City:
+                <input type="text" id="deliveryCity" name="deliveryCity"/>
+            </label>
+
+            <label for="deliveryState">State:
+                <input type="text" id="deliveryState" name="deliveryState"/>
+            </label>
+
+            <label for="deliveryZip">Zip code:
+                <input type="text" id="deliveryZip" name="deliveryZip"/>
+            </label>
+        </div>
+
+        <div>
+            <h3>Here's how I'll pay...</h3>
+            <label for="ccNumber">Credit card #:
+                <input type="text" id="ccNumber" name="ccNumber"/>
+            </label>
+
+            <label for="ccExpiration">Expiration:
+                <input type="text" id="ccExpiration" name="ccExpiration"/>
+            </label>
+
+            <label for="ccCVV">CCV:
+                <input type="text" id="ccCVV" name="ccCVV"/>
+            </label>
+        </div>
+
+        <input type="submit" value="Submit order"/>
     </form>
 </body>
 </html>
