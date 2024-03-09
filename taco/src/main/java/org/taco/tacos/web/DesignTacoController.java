@@ -1,10 +1,12 @@
 package org.taco.tacos.web;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.taco.tacos.Ingredients;
@@ -84,10 +86,14 @@ public class DesignTacoController
 
     //POST Handler
     @PostMapping
-    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder,
-                              HttpServletRequest request,
+    public String processTaco(@Valid Taco taco, @ModelAttribute TacoOrder tacoOrder,
+                              HttpServletRequest request, Errors errors,
                               @ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
     {
+        //Taco as a @Valid (an JSR 303 annotattion), so let's check for invalid data
+        if (errors.hasErrors())
+            return "/design";
+
         //Filtrar os elementos de 'map' comparando com os valores recebidos de request
         //Map com os parâmetros de solicitação. Abaixo tenho os checkbox marcados ('on')
         //no formato Map {on = 'Flour Tortilla', on = 'Sour Cream' etc)
