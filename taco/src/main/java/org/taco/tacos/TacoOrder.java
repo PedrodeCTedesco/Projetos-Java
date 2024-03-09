@@ -2,7 +2,11 @@
 
 package org.taco.tacos;
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +15,31 @@ import java.util.List;
 public class TacoOrder
 {
     //Fields
+    @NotBlank(message = "Delivery name is required") //JSR 303
     private String deliveryName;
+
+    @NotBlank(message = "Delivery street is required")
     private String deliveryStreet;
+
+    @NotBlank(message = "City is required")
     private String deliveryCity;
+
+    @NotBlank(message = "Tell us your street")
     private String deliveryState;
+
+    @NotBlank(message = "You forgot the zip code!")
     private String deliveryZip;
+
+    @CreditCardNumber(message = "Not a valid credit card number") //Hibernate validator
     private String ccNumber;
+
+    @Pattern(regexp = "^(0[1-9] | 1[0-2])([\\/])([2-9][0-9])$",
+    message = "Must be formatted MM/YY") //JSR 303
     private String ccExpiration;
+
+    @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
+
     private List<Taco> tacos = new ArrayList<>();
 
     //Client methods
