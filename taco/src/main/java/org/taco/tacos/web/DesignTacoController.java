@@ -81,14 +81,14 @@ public class DesignTacoController
         return defaultTacoOrder;
     }
 
-    @ModelAttribute(name = "taco")
-    public Taco taco(@ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
-    {
-        Taco defaultTaco = new Taco();
-        defaultTaco.setIngredientList(new ArrayList<>(map.values()));
-        defaultTaco.setName("Default taco as all ingredients");
-        return defaultTaco;
-    };//end of taco(...);
+    //@ModelAttribute(name = "taco")
+    //public Taco taco(@ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
+    //{
+      //  Taco defaultTaco = new Taco();
+       // defaultTaco.setIngredientList(new ArrayList<>(map.values()));
+       // defaultTaco.setName("Default taco as all ingredients");
+       // return defaultTaco;
+    //};//end of taco(...);
 
     //GET Handler
     @GetMapping
@@ -99,13 +99,17 @@ public class DesignTacoController
 
     //POST Handler
     @PostMapping
-    public String processTaco(@Valid Taco taco, @ModelAttribute TacoOrder tacoOrder,
+    public String processTaco(//@Valid Taco taco
+                              @ModelAttribute TacoOrder tacoOrder,
                               HttpServletRequest request, Errors errors,
                               @ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
     {
         //Taco as a @Valid (an JSR 303 annotattion), so let's check for invalid data
         if (errors.hasErrors())
             return "design";
+
+        //Cria um objeto Taco para atribuir os campos marcados do formulário
+        Taco taco = new Taco();
 
         //Filtrar os elementos de 'map' comparando com os valores recebidos de request
         //Map com os parâmetros de solicitação. Abaixo tenho os checkbox marcados ('on')
@@ -137,6 +141,10 @@ public class DesignTacoController
 
         //Configura os ingredientes no objeto Taco
         taco.setIngredientList(finalList);
+
+        //Configura o nome do objeto Taco
+        String tacoName = request.getParameter("name");
+        taco.setName(tacoName);
 
         //Adiciona o objeto Taco ao objeto TacoOrder. Note que todos os campos de Taco estão inicializados
         tacoOrder.addTaco(taco);
