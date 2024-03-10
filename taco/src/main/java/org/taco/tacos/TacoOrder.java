@@ -45,6 +45,8 @@ public class TacoOrder
     //Client methods
     public void addTaco(Taco taco)
     {
+        //ver se vale a pena inserir uma verificação para retirada de valores nulos
+
         this.tacos.add(taco);
     }
 };//end of TacoOrder
