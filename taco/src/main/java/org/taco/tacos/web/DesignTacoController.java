@@ -66,16 +66,29 @@ public class DesignTacoController
     };//addIngredientsToModel(Model model)
 
     @ModelAttribute(name = "tacoOrder")
-    public TacoOrder order()
+    public TacoOrder order(@ModelAttribute Taco taco)
     {
-        return new TacoOrder();
+        TacoOrder defaultTacoOrder = new TacoOrder();
+        defaultTacoOrder.setDeliveryName("default address");
+        defaultTacoOrder.setDeliveryCity("default city");
+        defaultTacoOrder.setDeliveryStreet("default street");
+        defaultTacoOrder.setDeliveryState("default state");
+        defaultTacoOrder.setDeliveryZip("default zip");
+        defaultTacoOrder.setCcNumber("5149451020805418");
+        defaultTacoOrder.setCcCVV("699");
+        defaultTacoOrder.setCcExpiration("06/29");
+        defaultTacoOrder.addTaco(taco);
+        return defaultTacoOrder;
     }
 
     @ModelAttribute(name = "taco")
-    public Taco taco()
+    public Taco taco(@ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
     {
-        return new Taco();
-    }
+        Taco defaultTaco = new Taco();
+        defaultTaco.setIngredientList(new ArrayList<>(map.values()));
+        defaultTaco.setName("Default taco as all ingredients");
+        return defaultTaco;
+    };//end of taco(...);
 
     //GET Handler
     @GetMapping
@@ -92,7 +105,7 @@ public class DesignTacoController
     {
         //Taco as a @Valid (an JSR 303 annotattion), so let's check for invalid data
         if (errors.hasErrors())
-            return "/design";
+            return "design";
 
         //Filtrar os elementos de 'map' comparando com os valores recebidos de request
         //Map com os parâmetros de solicitação. Abaixo tenho os checkbox marcados ('on')
