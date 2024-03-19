@@ -9,6 +9,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -30,11 +31,11 @@ public class TacoOrder
     @NotBlank(message = "You forgot the zip code!")
     private String deliveryZip;
 
-    @CreditCardNumber(message = "Not a valid credit card number") //Hibernate validator
+    //@CreditCardNumber(message = "Not a valid credit card number") //Hibernate validator. Uncomment to activate
     private String ccNumber;
 
-    @Pattern(regexp = "^(0[1-9] | 1[0-2])([\\/])([2-9][0-9])$",
-    message = "Must be formatted MM/YY") //JSR 303
+    @Pattern(regexp = "^(0[1-9]|1[0-2])/[0-9]{2}$",
+            message = "Must be formatted MM/YY") //JSR 303
     private String ccExpiration;
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
@@ -42,11 +43,12 @@ public class TacoOrder
 
     private List<Taco> tacos = new ArrayList<>();
 
+    private Long id;
+    private Date createdAt = new Date();
+
     //Client methods
     public void addTaco(Taco taco)
     {
-        //ver se vale a pena inserir uma verificação para retirada de valores nulos
-
         this.tacos.add(taco);
-    }
+    };//fim de addTaco(Taco taco);
 };//end of TacoOrder

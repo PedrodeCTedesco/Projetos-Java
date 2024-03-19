@@ -66,21 +66,20 @@ public class DesignTacoController
     };//addIngredientsToModel(Model model)
 
     @ModelAttribute(name = "tacoOrder")
-    public TacoOrder order(@ModelAttribute Taco taco)
+    public TacoOrder order()
     {
-        TacoOrder defaultTacoOrder = new TacoOrder();
-        defaultTacoOrder.setDeliveryName("default address");
-        defaultTacoOrder.setDeliveryCity("default city");
-        defaultTacoOrder.setDeliveryStreet("default street");
-        defaultTacoOrder.setDeliveryState("default state");
-        defaultTacoOrder.setDeliveryZip("default zip");
-        defaultTacoOrder.setCcNumber("5149451020805418");
-        defaultTacoOrder.setCcCVV("699");
-        defaultTacoOrder.setCcExpiration("06/29");
-        defaultTacoOrder.addTaco(taco);
-        return defaultTacoOrder;
+        //log.info("TacoOrder created when /desgin is accesed: " + tacoOrder);
+        return new TacoOrder();
     }
-
+/** Se eu descomentar este método ele tentará inserir um objeto Taco nos dados do modelo quando a página
+ * for acionada. Embora isso seja um comportamento adequado, no nosso caso isso acabará gerando um erro.
+ * O motivo é que como usamos no método processTaco a anotação @Valid* a JSR 303 tenta validar o
+ * objeto Taco criado no modelo antes da submissão dos dados do formulário. Como consequência,
+ * acabamos com uma mensagem de erro, ou com 2 objetos Taco no modelo após a submissão (sempre haverá
+ * um objeto Taco a mais além dos requisitados pelo usuário; o objeto extra é o defaultTaco).
+ *
+ *  *processTaco(@Valid Taco taco, @ModelAttribute TacoOrder tacoOrder...)
+ *
     //@ModelAttribute(name = "taco")
     //public Taco taco(@ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
     //{
@@ -89,7 +88,7 @@ public class DesignTacoController
        // defaultTaco.setName("Default taco as all ingredients");
        // return defaultTaco;
     //};//end of taco(...);
-
+*/
     //GET Handler
     @GetMapping
     public String showDesignForm()
@@ -99,8 +98,7 @@ public class DesignTacoController
 
     //POST Handler
     @PostMapping
-    public String processTaco(//@Valid Taco taco
-                              @ModelAttribute TacoOrder tacoOrder,
+    public String processTaco(@ModelAttribute TacoOrder tacoOrder,
                               HttpServletRequest request, Errors errors,
                               @ModelAttribute("tacoIngredients") Map<String, Ingredients> map)
     {

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,5 +20,8 @@ public class Taco
     @NotNull
     @Size(min = 1, message = "You must select at least one ingredient")
     private List<Ingredients> ingredientList;
+
+    private Long id;
+    private Date createdAt = new Date();
 
 };//end of Taco

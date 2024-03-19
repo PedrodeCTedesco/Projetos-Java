@@ -9,5 +9,5 @@ public class Main
     public static void main(String[] args)
     {
         SpringApplication.run(Main.class, args);
-    }
-}
+    };//fim do método main
+};//fim da classe Main
