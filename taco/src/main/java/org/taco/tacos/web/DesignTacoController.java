@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.taco.tacos.Ingredients;
 import org.taco.tacos.Taco;
 import org.taco.tacos.TacoOrder;
+import org.taco.tacos.database.IngredientRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,20 +25,30 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class DesignTacoController
 {
-    //fields
+    //Campos
     private final IngredientByNameConverter conversor;
+    private final IngredientRepository ingredientRepository;
 
     //constructor
     @Autowired
-    public DesignTacoController(IngredientByNameConverter conversor)
+    public DesignTacoController(IngredientByNameConverter conversor, IngredientRepository ingredientRepository)
     {
         this.conversor = conversor;
+        this.ingredientRepository = ingredientRepository;
     };//fim do construtor
 
     //Model attributes
     @ModelAttribute(name = "tacoIngredients")
     public void addIngredientsToModel(Model model)
     {
+        Iterable<Ingredients> ingredients = ingredientRepository.findAll();
+
+        Map<String, Ingredients> map = new HashMap<>();
+
+        for(Ingredients ingredientes : ingredients)
+            map.put(ingredientes.getName().toLowerCase(), ingredientes);
+
+       /**
         Map<String, Ingredients> map = new HashMap<>();
 
         Ingredients flourTortilla = new Ingredients("FLTO", "Flour Tortilla", Ingredients.Type.WRAP);
@@ -61,6 +72,8 @@ public class DesignTacoController
         map.put("monterrey jack", monterreyJack);
         map.put("salsa", salsa);
         map.put("sour cream", sourCream);
+
+        */
 
         model.addAttribute("tacoIngredients", map);
     };//addIngredientsToModel(Model model)

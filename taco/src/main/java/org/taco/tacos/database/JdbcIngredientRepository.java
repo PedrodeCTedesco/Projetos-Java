@@ -41,7 +41,7 @@ public class JdbcIngredientRepository implements IngredientRepository
                         this::mapRowToIngredients,
                         id);
 
-        return results.size() == 0 ?
+        return results.isEmpty() ?
                 Optional.empty() :
                 Optional.of(results.get(0));
     };//fim de Optional<Ingredients>findById(String id)
