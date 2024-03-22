@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,22 +18,38 @@ import java.util.List;
 public class Taco
 {
     //Campos
-    @Column(name = "name")
-    @NotNull //JSR 303
+    @Column(length=100, table="Taco")
+    @NotNull
+    @NaturalId
     @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
-    @Column(name = "ingredients_list")
-    @ManyToMany
     @NotNull
+    @OneToMany(mappedBy = "taco")
     @Size(min = 1, message = "You must select at least one ingredient")
     private List<Ingredients> ingredientList;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column(name="ID", table="Taco")
     private Long id;
 
-    @Column(name = "created_at")
+    @Version
+    @Column(name="created_at", table="Taco")
     private Date createdAt = new Date();
+
+    //Métodos sobrescritos
+    @Override
+    public boolean equals(Object anotherObj)
+    {
+        return anotherObj instanceof Taco
+                && ((Taco)anotherObj).getName().equals(name);
+    };//fim de equals(....)
+
+    @Override
+    public int hashCode()
+    {
+        return name.hashCode();
+    };//fim de hashCode();
 
 };//end of Taco
